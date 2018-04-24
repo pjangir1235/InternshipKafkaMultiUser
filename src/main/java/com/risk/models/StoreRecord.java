@@ -26,7 +26,7 @@ public class StoreRecord {
 
 
     private List<FlightScheduleDTO> flightSchedule;
-    private int flightMinOffset = -1;
+    private int flightMinOffset = 0;
     private int flightMaxOffset = 0;
     private int key = 0;
 

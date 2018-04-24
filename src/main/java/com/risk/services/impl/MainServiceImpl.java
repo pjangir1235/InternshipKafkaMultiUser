@@ -10,9 +10,11 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.risk.constants.CommonConstant;
+import com.risk.consumer.listeners.FlightScheduleListenerSample;
 import com.risk.consumer.model.CrewDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
 import com.risk.consumer.model.PilotDTO;
@@ -69,6 +71,11 @@ public class MainServiceImpl implements MainService {
   @Autowired AirportRecord recordAirport;
   @Autowired AnalysisServiceImpl analysisService;
   @Autowired LocalDateString dateConverter;
+
+  @Autowired FlightScheduleListenerSample sample;
+
+  @Value("${kafka.topic-flightSchedule}")
+  private String topicValueSchedule;
 
   @Override
   public void checkFetchData() {
@@ -205,11 +212,19 @@ public class MainServiceImpl implements MainService {
 
   @Override
   public List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req) {
-      List<FlightScheduleDTO> flight = new ArrayList<>();
-      StoreRecord rec = new StoreRecord();
-      setKey(rec);
-     flightScheduleData.getFlightScheduleData(req.getLocation(), req.getDate(), rec);
-     System.out.println("Min : "+ rec.getFlightMinOffset()+" max ; "+rec.getFlightMaxOffset());
+
+    List<FlightScheduleDTO> flight = new ArrayList<>();
+    StoreRecord rec = new StoreRecord();
+    setKey(rec);
+    flightScheduleData.getFlightScheduleData(req.getLocation(), req.getDate(), rec);
+    System.out.println("Min : " + rec.getFlightMinOffset() + " max ; " + rec.getFlightMaxOffset());
+
+    flight=sample.start( topicValueSchedule,
+            "flightSchedule",
+            rec.getFlightMinOffset(),
+            (long)(rec.getFlightMaxOffset() - rec.getFlightMinOffset()) + 1,
+            rec.getKey());
+
     return flight;
   }
 
@@ -230,7 +245,7 @@ public class MainServiceImpl implements MainService {
 
   @Override
   public void setKey(StoreRecord rec) {
-      Random r1=new Random();
-      rec.setKey(r1.nextInt());
+    Random r1 = new Random();
+    rec.setKey(r1.nextInt());
   }
 }

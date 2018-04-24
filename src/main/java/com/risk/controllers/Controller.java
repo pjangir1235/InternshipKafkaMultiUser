@@ -153,6 +153,7 @@ public class Controller {
       list = producer.getFlightScheduleValues(req);
       return list;
     } catch (Exception e) {
+	e.printStackTrace();
       logger.error(CommonConstant.ERROR + e);
       return list;
     }
