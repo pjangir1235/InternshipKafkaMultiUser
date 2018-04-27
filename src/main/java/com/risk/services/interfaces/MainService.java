@@ -3,6 +3,7 @@ package com.risk.services.interfaces;
 import java.text.ParseException;
 import java.util.List;
 
+import com.risk.consumer.model.AircraftDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
 import com.risk.models.ScheduleRequestDTO;
 import com.risk.models.StoreRecord;
@@ -16,7 +17,7 @@ public interface MainService {
 
   void getAircraftTypeValues();
 
-  void getAircraftValues(String aircraftCode);
+  List<AircraftDTO> getAircraftValues(String aircraftCode);
 
   void getAnalysisData() throws ParseException;
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.risk.models.StoreRecord;
 import com.risk.producer.dispatcher.AircraftCodeDispatcher;
 import com.risk.producer.dispatcher.AircraftDispatcher;
 import com.risk.producer.intefacerepo.AircraftRepo;
@@ -20,10 +21,14 @@ public class AircraftServiceImpl implements AircraftService {
   @Autowired AircraftCodeDispatcher codeDispatcher;
 
   @Override
-  public void getAircraftData(String aircraftCode) {
+  public void getAircraftData(String aircraftCode, StoreRecord rec) {
+	  System.out.println("i come to class key "+rec.getKey());
     Iterable<Aircraft> itr = craftRepo.findData(aircraftCode);
     Iterator<Aircraft> iter = itr.iterator();
-    while (iter.hasNext()) craftDispatcher.dispatch(iter.next());
+    while (iter.hasNext()) {
+    	System.out.println("i am here with key "+rec.getKey());
+    	craftDispatcher.dispatch(iter.next(),rec);
+    }
   }
 
   @Override

@@ -9,12 +9,14 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+@Service
 public class KakfaConsumerSelection {
 
-  public static KafkaConsumer<Integer, JsonNode> setKafka(
+  public  KafkaConsumer<Integer, JsonNode> setKafka(
       String topicName, String groupId, long startingOffset) {
 
     Properties configProperties = new Properties();
@@ -26,9 +28,8 @@ public class KakfaConsumerSelection {
         ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
         "org.apache.kafka.connect.json.JsonDeserializer");
     configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
-    configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "offset123");
-    configProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-    configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    configProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+//    configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     //Figure out where to start processing messages from
     KafkaConsumer<Integer, JsonNode> kafkaConsumer =
         new KafkaConsumer<Integer, JsonNode>(configProperties);
@@ -52,12 +53,13 @@ public class KakfaConsumerSelection {
               TopicPartition topicPartition = topicPartitionIterator.next();
               System.out.println(
                   "Current offset is "
-                      + kafkaConsumer.position(topicPartition)
+                      + kafkaConsumer.position(topicPartition)+topicPartition.topic()
                       + " committed offset is ->"
                       + kafkaConsumer.committed(topicPartition));
 
               System.out.println("Resetting offset to " + startingOffset);
-              kafkaConsumer.seek(topicPartition, startingOffset);
+              kafkaConsumer.seek(topicPartition, startingOffset
+            				  );
               System.out.println("Resetting offset to " + startingOffset);
             }
           }

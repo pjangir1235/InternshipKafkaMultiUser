@@ -24,13 +24,24 @@ import com.risk.result.model.SourceEnvironment;
 
 public class StoreRecord {
 
-
+    private int key = 0;
     private List<FlightScheduleDTO> flightSchedule;
     private int flightMinOffset = 0;
     private int flightMaxOffset = 0;
-    private int key = 0;
 
-    public int getFlightMinOffset() {
+    private List<AircraftDTO> aircraft;
+    private int aircraftOffset=0;
+
+
+
+
+    public int getAircraftOffset() {
+  return aircraftOffset;}
+
+  public void setAircraftOffset(int aircraftOffset) {
+  this.aircraftOffset = aircraftOffset;}
+
+  public int getFlightMinOffset() {
       return flightMinOffset;
     }
 
@@ -54,8 +65,21 @@ public class StoreRecord {
       this.key = key;
     }
 
+//
+    ////////
+    ////
+    //
+    //
+    //
+    //
+    //
+    //
+    ////
+    //
+    //
+    //
+    //
 
-  private List<AircraftDTO> aircraft;
   private List<AircraftTypeDTO> aircraftType;
   private List<CrewDTO> crew;
 

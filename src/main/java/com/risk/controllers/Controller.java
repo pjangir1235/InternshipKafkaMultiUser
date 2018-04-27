@@ -39,6 +39,20 @@ public class Controller {
   @Autowired StoreRecord record;
   @Autowired AirportRecord recordAirport;
 
+  @PostMapping("/flightSchedule")
+  public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
+    List<FlightScheduleDTO> list = null;
+    try {
+      list = producer.getFlightScheduleValues(req);
+      return list;
+    } catch (Exception e) {
+      e.printStackTrace();
+      logger.error(CommonConstant.ERROR + e);
+      return list;
+    }
+  }
+
+  ///not done
   @PostMapping("analysis")
   public FinalAnalysisData doAnalysis(@RequestBody FlightScheduleDTO schedule) {
     record.destroy();
@@ -57,10 +71,7 @@ public class Controller {
   public List<AircraftDTO> getaircraft(@PathVariable("code") String aircraftCode) {
     List<AircraftDTO> list = null;
     try {
-
-      producer.getAircraftValues(aircraftCode);
-      producer.checkFetchData();
-      list = record.getAircraft();
+      list = producer.getAircraftValues(aircraftCode);
       return list;
     } catch (Exception e) {
       logger.error(CommonConstant.ERROR + e);
@@ -141,21 +152,6 @@ public class Controller {
     } catch (Exception e) {
       logger.error(CommonConstant.ERROR + e);
       return data;
-    }
-  }
-
-  @PostMapping("/flightSchedule")
-  public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
-    record.destroy();
-    List<FlightScheduleDTO> list = null;
-    try {
-
-      list = producer.getFlightScheduleValues(req);
-      return list;
-    } catch (Exception e) {
-	e.printStackTrace();
-      logger.error(CommonConstant.ERROR + e);
-      return list;
     }
   }
 

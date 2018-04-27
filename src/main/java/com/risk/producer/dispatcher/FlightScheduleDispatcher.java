@@ -26,7 +26,7 @@ public class FlightScheduleDispatcher {
           kafkaTemplate.sendDefault(new Integer(rec.getKey()), craft).get();
 
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
-      if (rec.getFlightMinOffset() == -1) rec.setFlightMinOffset((int) recordMetadata.offset());
+      if (rec.getFlightMinOffset() == 0) rec.setFlightMinOffset((int) recordMetadata.offset());
 
       if(rec.getFlightMaxOffset()<(int)recordMetadata.offset())
 	  rec.setFlightMaxOffset((int)recordMetadata.offset());

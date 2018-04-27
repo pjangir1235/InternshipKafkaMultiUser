@@ -16,13 +16,11 @@ public class AircraftDispatcher {
   private static final Logger log = LoggerFactory.getLogger(AircraftDispatcher.class);
 
   @Autowired private KafkaTemplate<Integer, Aircraft> kafkaTemplate;
-  @Autowired StoreRecord record;
-
-  public boolean dispatch(Aircraft craft) {
+  public boolean dispatch(Aircraft craft ,StoreRecord rec) {
     try {
       SendResult<Integer, Aircraft> sendResult =
-          kafkaTemplate.sendDefault(craft.getAircraftId(), craft).get();
-      record.setAircraftCount(record.getAircraftCount() + 1);
+          kafkaTemplate.sendDefault(Integer.valueOf(rec.getKey()), craft).get();
+
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
       String metaRecord =
           "{offset - "
@@ -33,6 +31,7 @@ public class AircraftDispatcher {
               + recordMetadata.timestamp()
               + " }";
       log.info(metaRecord);
+      rec.setAircraftOffset((int)recordMetadata.offset());
       return true;
     } catch (Exception e) {
       log.error(" " + e);
