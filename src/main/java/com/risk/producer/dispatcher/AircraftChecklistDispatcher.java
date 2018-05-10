@@ -18,12 +18,12 @@ public class AircraftChecklistDispatcher {
   @Autowired private KafkaTemplate<Integer, AircraftChecklist> kafkaTemplate;
   @Autowired StoreRecord record;
 
-  public boolean dispatch(AircraftChecklist craft) {
+  public boolean dispatch(AircraftChecklist craft,StoreRecord rec) {
     try {
       SendResult<Integer, AircraftChecklist> sendResult =
           kafkaTemplate.sendDefault(craft.getChecklistId(), craft).get();
-      record.setAircraftChecklistCount(record.getAircraftChecklistCount() + 1);
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
+      rec.setChecklistOffset((int)recordMetadata.offset());
       String metaRecord =
           "{offset - "
               + recordMetadata.offset()

@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.risk.constants.Urls;
 import com.risk.models.Environment;
+import com.risk.models.StoreRecord;
 import com.risk.producer.dispatcher.EnvironmentDispatcher;
 import com.risk.services.interfaces.EnvironmentService;
 
@@ -16,10 +17,10 @@ public class EnvironmentServiceImpl implements EnvironmentService {
   @Autowired private EnvironmentDispatcher envDispatch;
 
   @Override
-  public void getEnvironmentData(String stationCode) {
+  public void getEnvironmentData(String stationCode, StoreRecord rec) {
     RestTemplate rest = new RestTemplate();
     Environment env =
         rest.getForObject(Urls.ENVURLSTART + stationCode + Urls.ENVURLEND, Environment.class);
-    envDispatch.dispatch(env);
+    envDispatch.dispatch(env,rec);
   }
 }

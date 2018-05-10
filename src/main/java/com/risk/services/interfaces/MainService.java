@@ -5,36 +5,26 @@ import java.util.List;
 
 import com.risk.consumer.model.AircraftDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
+import com.risk.models.Environment;
 import com.risk.models.ScheduleRequestDTO;
 import com.risk.models.StoreRecord;
+import com.risk.producer.model.User;
+import com.risk.result.model.FinalAnalysisData;
 
 public interface MainService {
-  void checkFetchData();
 
-  void getAiprotValues();
+	void getAiprotValues();
 
-  void getAircraftChecklistValues();
+	List<AircraftDTO> getAircraftValues(String aircraftCode);
 
-  void getAircraftTypeValues();
+	FinalAnalysisData getAnalysisData(FlightScheduleDTO flightData) throws ParseException;
 
-  List<AircraftDTO> getAircraftValues(String aircraftCode);
+	Environment getEnvironmentValues(String stationCode);
 
-  void getAnalysisData() throws ParseException;
+	List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req);
 
-  void getCrewValues();
+	boolean getUserValues(User user);
 
-  void getEnvironmentValues(String stationCode);
+	void setKey(StoreRecord rec);
 
-  void getFlightScheduleCrewValues();
-
-  void getFlightSchedulePilotValues();
-
-  List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req);
-
-  void getPilotDesignationValues();
-
-  void getPilotValues();
-
-  void getUserValues(String userName, String password);
-  void setKey(StoreRecord rec);
 }

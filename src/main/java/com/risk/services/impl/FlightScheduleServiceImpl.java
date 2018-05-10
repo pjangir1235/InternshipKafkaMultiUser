@@ -24,7 +24,6 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
   @Autowired FlightPilotSummaryDispatcher pilotSummaryDispatcher;
   @Autowired FlightCaptainSummaryDispatcher captainSummaryDispatcher;
   @Autowired IteratorSize itrSize;
-  @Autowired StoreRecord record;
   @Override
   public void getFlightScheduleData(String location, String date,StoreRecord rec) {
     Iterable<FlightSchedule> itr = craftRepo.findSchedule(location, date);
@@ -35,20 +34,18 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
 
   @Override
   public void getFlightSchedulePilotData(
-      int pilotId, String pilotDesignationCode, String dateOfDeparture) {
+      int pilotId, String pilotDesignationCode, String dateOfDeparture,StoreRecord rec) {
     if (pilotDesignationCode.equals("PD1")) {
       Iterable<FlightCaptainSummary> itr = craftRepo.getCaptainData(pilotId, dateOfDeparture);
       Iterator<FlightCaptainSummary> iter = itr.iterator();
-      record.setFlightCaptainSummaryCount(itrSize.size(itr));
-       while(iter.hasNext())
-    	captainSummaryDispatcher.dispatch(iter.next());
+      while(iter.hasNext())
+    	captainSummaryDispatcher.dispatch(iter.next(),rec);
 
     } else {
       Iterable<FlightPilotSummary> itr = craftRepo.getPilotData(pilotId, dateOfDeparture);
       Iterator<FlightPilotSummary> iter = itr.iterator();
-      record.setFlightPilotSummaryCount(itrSize.size(itr));
       while(iter.hasNext())
-    	  pilotSummaryDispatcher.dispatch(iter.next());
+    	  pilotSummaryDispatcher.dispatch(iter.next(),rec);
     }
 
 

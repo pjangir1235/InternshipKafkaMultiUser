@@ -1,7 +1,6 @@
 package com.risk.services.analysis.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.risk.constants.CommonConstant;
 import com.risk.consumer.model.AircraftChecklistDTO;
@@ -11,23 +10,26 @@ import com.risk.result.model.AircraftCheckListDetail;
 import com.risk.util.Calculation;
 import com.risk.util.LocalDateString;
 
-@Service
+
 public class AircraftAnalysisServiceImpl {
 
-  @Autowired LocalDateString convert;
+  public AircraftAnalysisServiceImpl() {
+		super();
+	}
 
-  @Autowired StoreRecord record;
+@Autowired LocalDateString convert;
+
+
 
   @Autowired Calculation calc;
 
+  private StoreRecord record;
   FlightScheduleDTO data;
   AircraftCheckListDetail finalResult;
 
-  public AircraftAnalysisServiceImpl() {
+  public AircraftAnalysisServiceImpl(StoreRecord record) {
     super();
-  }
-
-  public void setValues() {
+    this.record=record;
     data = record.getSchedule();
     finalResult = new AircraftCheckListDetail();
     setInit();

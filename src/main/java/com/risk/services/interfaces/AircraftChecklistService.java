@@ -1,8 +1,8 @@
 package com.risk.services.interfaces;
 
+import com.risk.models.StoreRecord;
+
 public interface AircraftChecklistService {
 
-  void getAircraftChecklistData();
-
-  void getAircraftChecklistOnAircraftCodeData(String aircraftCode, String dateOfDeparture);
+  void getAircraftChecklistOnAircraftCodeData(String aircraftCode, String dateOfDeparture,StoreRecord rec);
 }

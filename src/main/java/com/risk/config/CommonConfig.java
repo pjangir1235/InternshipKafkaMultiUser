@@ -17,6 +17,9 @@ public class CommonConfig {
   public StoreRecord store() {
     return new StoreRecord();
   }
+
+
+
   @Bean
   public RestTemplate restTemplate(
           RestTemplateBuilder restTemplateBuilder) {

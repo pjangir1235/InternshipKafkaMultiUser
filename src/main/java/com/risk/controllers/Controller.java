@@ -13,236 +13,207 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.risk.constants.CommonConstant;
 import com.risk.consumer.model.AircraftDTO;
-import com.risk.consumer.model.AircraftTypeDTO;
 import com.risk.consumer.model.AirportDTO;
-import com.risk.consumer.model.CrewDTO;
-import com.risk.consumer.model.FlightScheduleCrewDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
-import com.risk.consumer.model.FlightSchedulePilotDTO;
-import com.risk.consumer.model.PilotDTO;
-import com.risk.consumer.model.PilotDesignationDTO;
-import com.risk.consumer.model.UserDTO;
 import com.risk.models.AirportRecord;
 import com.risk.models.Environment;
 import com.risk.models.ScheduleRequestDTO;
 import com.risk.models.StoreRecord;
+import com.risk.producer.model.User;
 import com.risk.result.model.FinalAnalysisData;
 import com.risk.services.interfaces.MainService;
 
 @RestController
 public class Controller {
 
-  private static final Logger logger = LoggerFactory.getLogger(Controller.class);
+	private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
-  @Autowired MainService producer;
+	@Autowired
+	MainService producer;
 
-  @Autowired StoreRecord record;
-  @Autowired AirportRecord recordAirport;
+	@Autowired
+	StoreRecord record;
+	@Autowired
+	AirportRecord recordAirport;
 
-  @PostMapping("/flightSchedule")
-  public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
-    List<FlightScheduleDTO> list = null;
-    try {
-      list = producer.getFlightScheduleValues(req);
-      return list;
-    } catch (Exception e) {
-      e.printStackTrace();
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+	@GetMapping("/aircraft/{code}")
+	public List<AircraftDTO> getaircraft(@PathVariable("code") String aircraftCode) {
+		List<AircraftDTO> list = null;
+		try {
+			list = producer.getAircraftValues(aircraftCode);
+			return list;
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+			return list;
+		}
+	}
 
-  ///not done
-  @PostMapping("analysis")
-  public FinalAnalysisData doAnalysis(@RequestBody FlightScheduleDTO schedule) {
-    record.destroy();
-    record.setSchedule(schedule);
-    FinalAnalysisData data = new FinalAnalysisData();
-    try {
-      producer.getAnalysisData();
-      return record.getFinalData();
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return data;
-    }
-  }
+	@GetMapping("/airport")
+	public List<AirportDTO> getAirport() {
+		List<AirportDTO> list = null;
+		try {
+//			if (!recordAirport.isUpdated()) {
+//				producer.getAiprotValues();
+//				recordAirport.setUpdated(true);
+//			}
+			list = recordAirport.getAirport();
+			return list;
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+			return list;
+		}
+	}
 
-  @GetMapping("/aircraft/{code}")
-  public List<AircraftDTO> getaircraft(@PathVariable("code") String aircraftCode) {
-    List<AircraftDTO> list = null;
-    try {
-      list = producer.getAircraftValues(aircraftCode);
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+	@PostMapping("/flightSchedule")
+	public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
+		List<FlightScheduleDTO> list = null;
+		try {
+			list = producer.getFlightScheduleValues(req);
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(CommonConstant.ERROR + e);
+			return list;
+		}
+	}
+	@PostMapping("/user")
+	public boolean getUser(@RequestBody User user) {
+		boolean IsValid = false;
+		try {
+			IsValid = producer.getUserValues(user);
+			return IsValid;
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+			return IsValid;
+		}
+	}
 
-  //  @GetMapping("/aircraftChecklist")
-  //  public List<AircraftChecklistDTO> getAircraftChecklist() {
-  //    List<AircraftChecklistDTO> list = null;
-  //    try {
-  //
-  //      producer.getAircraftChecklistValues();
-  //      //producer.checkFetchData();
-  //      list = record.getAircraftChecklist();
-  //      return list;
-  //    } catch (Exception e) {
-  //      logger.error(CommonConstant.ERROR + e);
-  //      return list;
-  //    }
-  //  }
 
-  @GetMapping("/aircraftType")
-  public List<AircraftTypeDTO> getAircraftType() {
-    List<AircraftTypeDTO> list = null;
-    try {
 
-      producer.getAircraftTypeValues();
-      //producer.checkFetchData();
-      list = record.getAircraftType();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+	//
+	//
+	// Working on
+	@PostMapping("analysis")
+	public FinalAnalysisData doAnalysis(@RequestBody FlightScheduleDTO schedule) {
+		FinalAnalysisData data = new FinalAnalysisData();
+		System.out.println("pos1");
+		try {
+			System.out.println("pos2");
+			data=producer.getAnalysisData(schedule);
+			return data;
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+			return data;
+		}
+	}
 
-  @GetMapping("/airport")
-  public List<AirportDTO> getAirport() {
-    List<AirportDTO> list = null;
-    try {
-      if (!recordAirport.isUpdated()) {
-        producer.getAiprotValues();
-        producer.checkFetchData();
-        recordAirport.setUpdated(true);
-      }
-      list = recordAirport.getAirport();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+	//
+	//
+	//
+	//
+	//
+	/// not done
 
-  @GetMapping("/crew")
-  public List<CrewDTO> getCrew() {
-    List<CrewDTO> list = null;
-    try {
+	@GetMapping("/environment/{code}")
+	public Environment getEnvironment(@PathVariable("code") String stationCode) {
+		Environment data = null;
+		try {
 
-      producer.getCrewValues();
-      //producer.checkFetchData();
+			data = producer.getEnvironmentValues(stationCode);
+			return data;
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+			return data;
+		}
+	}
 
-      list = record.getCrew();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+	// @GetMapping("/aircraftChecklist")
+	// public List<AircraftChecklistDTO> getAircraftChecklist() {
+	// List<AircraftChecklistDTO> list = null;
+	// try {
+	//
+	// producer.getAircraftChecklistValues();
+	// //producer.checkFetchData();
+	// list = record.getAircraftChecklist();
+	// return list;
+	// } catch (Exception e) {
+	// logger.error(CommonConstant.ERROR + e);
+	// return list;
+	// }
+	// }
 
-  @GetMapping("/environment")
-  public List<Environment> getEnvironmentDetail() {
-    List<Environment> data = null;
-    try {
 
-      data = record.getEnv();
-      return data;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return data;
-    }
-  }
 
-  @GetMapping("/flightScheduleCrew")
-  public List<FlightScheduleCrewDTO> getFlightScheduleCrew() {
-    List<FlightScheduleCrewDTO> list = null;
-    try {
 
-      producer.getFlightScheduleCrewValues();
-      //producer.checkFetchData();
-      list = record.getFlightScheduleCrew();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
+//	@GetMapping("/flightScheduleCrew")
+//	public List<FlightScheduleCrewDTO> getFlightScheduleCrew() {
+//		List<FlightScheduleCrewDTO> list = null;
+//		try {
+//
+//			producer.getFlightScheduleCrewValues();
+//			// producer.checkFetchData();
+//			list = record.getFlightScheduleCrew();
+//			return list;
+//		}
+//		catch (Exception e) {
+//			logger.error(CommonConstant.ERROR + e);
+//			return list;
+//		}
+//	}
+//
+//	@GetMapping("/flightSchedulePilot")
+//	public List<FlightSchedulePilotDTO> getFlightSchedulePilot() {
+//		List<FlightSchedulePilotDTO> list = null;
+//		try {
+//
+//			producer.getFlightSchedulePilotValues();
+//			// producer.checkFetchData();
+//			list = record.getFlightSchedulePilot();
+//			return list;
+//		}
+//		catch (Exception e) {
+//			logger.error(CommonConstant.ERROR + e);
+//			return list;
+//		}
+//	}
+//
+//	@GetMapping("/pilot")
+//	public List<PilotDTO> getPilot() {
+//		List<PilotDTO> list = null;
+//		try {
+//
+//			producer.getPilotValues();
+//			// producer.checkFetchData();
+//			list = record.getPilot();
+//			return list;
+//		}
+//		catch (Exception e) {
+//			logger.error(CommonConstant.ERROR + e);
+//			return list;
+//		}
+//	}
+//
+//	@GetMapping("/pilotDesignation")
+//	public List<PilotDesignationDTO> getPilotDesignationData() {
+//		List<PilotDesignationDTO> list = null;
+//		try {
+//
+//			producer.getPilotDesignationValues();
+//			// producer.checkFetchData();
+//			list = record.getPilotDesignation();
+//			return list;
+//		}
+//		catch (Exception e) {
+//			logger.error(CommonConstant.ERROR + e);
+//			return list;
+//		}
+//	}
 
-  @GetMapping("/flightSchedulePilot")
-  public List<FlightSchedulePilotDTO> getFlightSchedulePilot() {
-    List<FlightSchedulePilotDTO> list = null;
-    try {
 
-      producer.getFlightSchedulePilotValues();
-      //producer.checkFetchData();
-      list = record.getFlightSchedulePilot();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
-
-  @GetMapping("/pilot")
-  public List<PilotDTO> getPilot() {
-    List<PilotDTO> list = null;
-    try {
-
-      producer.getPilotValues();
-      //producer.checkFetchData();
-      list = record.getPilot();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
-
-  @GetMapping("/pilotDesignation")
-  public List<PilotDesignationDTO> getPilotDesignationData() {
-    List<PilotDesignationDTO> list = null;
-    try {
-
-      producer.getPilotDesignationValues();
-      //producer.checkFetchData();
-      list = record.getPilotDesignation();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
-
-  //  @GetMapping("/restDetail")
-  //  public List<RestDetailDTO> getRestDetail() {
-  //    List<RestDetailDTO> list = null;
-  //    try {
-  //
-  //      producer.getRestDetailValues();
-  //      //producer.checkFetchData();
-  //      list = record.getRestDetail();
-  //      return list;
-  //    } catch (Exception e) {
-  //      logger.error(CommonConstant.ERROR + e);
-  //      return list;
-  //    } finally {
-  //
-  //    }
-  //  }
-
-  @PostMapping("/user")
-  public List<UserDTO> getUser(@RequestBody UserDTO user) {
-    List<UserDTO> list = null;
-    try {
-      producer.getUserValues(user.getUserName(), user.getPassword());
-      producer.checkFetchData();
-      list = record.getUser();
-      return list;
-    } catch (Exception e) {
-      logger.error(CommonConstant.ERROR + e);
-      return list;
-    }
-  }
 }

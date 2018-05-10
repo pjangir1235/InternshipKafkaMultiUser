@@ -6,5 +6,5 @@ public interface FlightScheduleService {
 
   void getFlightScheduleData(String location, String date,StoreRecord rec);
 
-  void getFlightSchedulePilotData(int pilotId, String pilotDesignationCode, String dateOfDeparture);
+  void getFlightSchedulePilotData(int pilotId, String pilotDesignationCode, String dateOfDeparture,StoreRecord rec);
 }

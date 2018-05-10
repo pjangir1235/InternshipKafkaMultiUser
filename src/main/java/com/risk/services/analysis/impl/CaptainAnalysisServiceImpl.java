@@ -3,7 +3,6 @@ package com.risk.services.analysis.impl;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.risk.consumer.model.FlightCaptainSummaryDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
@@ -12,49 +11,51 @@ import com.risk.result.model.CaptainDetail;
 import com.risk.util.Calculation;
 import com.risk.util.LocalDateString;
 
-@Service
+
 public class CaptainAnalysisServiceImpl {
 
-  @Autowired LocalDateString convert;
-
-  @Autowired StoreRecord record;
 
   @Autowired Calculation calc;
 
-
-  FlightScheduleDTO data;
-  CaptainDetail finalResult;
-  LocalDate scheduleDate;
+  private StoreRecord record;
+  private FlightScheduleDTO data;
+  private CaptainDetail finalResult;
+  private LocalDate scheduleDate;
   int durationLastNinty;
   int durationTotal;
   int landing;
   double result;
 
-
-  public CaptainAnalysisServiceImpl() {
-    super();
-  }
-
-  public void setValues() {
+public CaptainAnalysisServiceImpl() {
+	super();
+}
+  public CaptainAnalysisServiceImpl(StoreRecord record) {
+    this.record=record;
     data = record.getSchedule();
-    scheduleDate = convert.stringToLocalDate(data.getDateOfDeparture());
+
+    scheduleDate = LocalDateString.stringToLocalDate(data.getDateOfDeparture());
+
     durationLastNinty = 0;
+
     landing = 0;
+
     durationTotal = 0;
   }
 
   public void getDataAnalysis(FlightCaptainSummaryDTO captain) {
 
-    LocalDate curDate = convert.stringToLocalDate(captain.getDateOfDeparture());
-    long diff = convert.differnceInDate(curDate, scheduleDate);
+    LocalDate curDate = LocalDateString.stringToLocalDate(captain.getDateOfDeparture());
+    long diff = LocalDateString.differnceInDate(curDate, scheduleDate);
     if (diff < 90) durationLastNinty += captain.getDuration();
     durationTotal += captain.getDuration();
     if (diff <= 15) landing++;
     record.setFlightCaptainSummaryCount(record.getFlightCaptainSummaryCount() - 1);
 
-    if (record.getFlightCaptainSummaryCount() == 0)
-    {
-      finalResult = new CaptainDetail();
+
+
+  }
+  public void finalCalc() {
+	  finalResult = new CaptainDetail();
       double hour;
       hour = calc.getHour(durationLastNinty);
       result = calc.getPercentage(hour, 100, 5);
@@ -81,6 +82,6 @@ public class CaptainAnalysisServiceImpl {
               + (data.getDuration() % 60));
       System.out.println(finalResult.toString());
       record.setCaptainDetail(finalResult);
-    }
+
   }
 }

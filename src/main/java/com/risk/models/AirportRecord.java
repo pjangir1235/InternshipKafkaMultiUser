@@ -60,4 +60,11 @@ public class AirportRecord {
   public void setAirport(AirportDTO airport) {
     this.airport.add(airport);
   }
+
+@Override
+public String toString() {
+	return "AirportRecord [isUpdated=" + isUpdated + ", startOffset=" + startOffset + ", endOffSet=" + endOffSet
+	                + ", airport=" + airport + ", airportCount=" + airportCount + "]";
+}
+
 }

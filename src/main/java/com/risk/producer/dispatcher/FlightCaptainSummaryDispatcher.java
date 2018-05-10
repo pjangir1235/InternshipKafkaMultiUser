@@ -10,6 +10,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import com.risk.models.StoreRecord;
 import com.risk.producer.model.FlightCaptainSummary;
 
 @Service
@@ -20,11 +21,15 @@ public class FlightCaptainSummaryDispatcher {
 //  @Autowired StoreRecord record;
   Random randon=new Random();
 
-  public boolean dispatch(FlightCaptainSummary summary) {
+  public boolean dispatch(FlightCaptainSummary summary,StoreRecord record) {
     try {
-      SendResult<Integer, FlightCaptainSummary> sendResult = kafkaTemplate.sendDefault(randon.nextInt(), summary).get();
-//      record.setFlightCaptainSummaryCount(record.getFlightCaptainSummaryCount() + 1);
+      SendResult<Integer, FlightCaptainSummary> sendResult = kafkaTemplate.sendDefault(record.getKey(), summary).get();
+
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
+      if(record.getFlightCaptainMinOffset()==-1)
+			record.setFlightCaptainMinOffset((int)(recordMetadata.offset()));
+		else
+			record.setFlightCaptainMaxOffset((int)(recordMetadata.offset()));
       String metaRecord =
           "{offset - "
               + recordMetadata.offset()

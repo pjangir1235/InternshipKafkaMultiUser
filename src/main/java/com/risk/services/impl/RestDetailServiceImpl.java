@@ -1,7 +1,5 @@
 package com.risk.services.impl;
 
-import java.util.Iterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +19,10 @@ public class RestDetailServiceImpl implements RestDetailService {
   @Autowired StoreRecord record;
 
   @Override
-  public void getCrewRestDetail(int crewMemberId, String date) {
+  public void getCrewRestDetail(int crewMemberId, String date,StoreRecord record) {
 
-    Iterable<RestDetail> itr = craftRepo.findById(crewMemberId, date);
-    Iterator<RestDetail> iter = itr.iterator();
-    while (iter.hasNext()) craftDispatcher.dispatch(iter.next());
+    RestDetail detail= craftRepo.findById(crewMemberId, date);
+    craftDispatcher.dispatch(detail, record);
   }
 
 //  @Override

@@ -10,37 +10,36 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import com.risk.models.StoreRecord;
 import com.risk.producer.model.FlightPilotSummary;
 
 @Service
 public class FlightPilotSummaryDispatcher {
-  private static final Logger log = LoggerFactory.getLogger(FlightPilotSummaryDispatcher.class);
+	private static final Logger log = LoggerFactory.getLogger(FlightPilotSummaryDispatcher.class);
 
+	@Autowired
+	private KafkaTemplate<Integer, FlightPilotSummary> kafkaTemplate;
+	// @Autowired StoreRecord record;
+	Random randon = new Random();
 
-  @Autowired private KafkaTemplate<Integer, FlightPilotSummary> kafkaTemplate;
-  //  @Autowired StoreRecord record;
-  Random randon = new Random();
+	public boolean dispatch(FlightPilotSummary summary, StoreRecord record) {
+		try {
+			SendResult<Integer, FlightPilotSummary> sendResult = kafkaTemplate.sendDefault(record.getKey(), summary)
+			                .get();
+			RecordMetadata recordMetadata = sendResult.getRecordMetadata();
 
-  public boolean dispatch(FlightPilotSummary summary) {
-    try {
-      SendResult<Integer, FlightPilotSummary> sendResult =
-          kafkaTemplate.sendDefault(randon.nextInt(), summary).get();
-
-      //      record.setFlightPilotSummaryCount(record.getFlightPilotSummaryCount() + 1);
-      RecordMetadata recordMetadata = sendResult.getRecordMetadata();
-      String metaRecord =
-          "{offset - "
-              + recordMetadata.offset()
-              + " partition - "
-              + recordMetadata.partition()
-              + " TimeStamp - "
-              + recordMetadata.timestamp()
-              + " }";
-      log.info(metaRecord);
-      return true;
-    } catch (Exception e) {
-      log.error(" " + e);
-      return false;
-    }
-  }
+			if (record.getFlightPilotMinOffset() == -1)
+				record.setFlightPilotMinOffset((int) (recordMetadata.offset()));
+			else
+				record.setFlightPilotMaxOffset((int) (recordMetadata.offset()));
+			String metaRecord = "{offset - " + recordMetadata.offset() + " partition - " + recordMetadata.partition()
+			                + " TimeStamp - " + recordMetadata.timestamp() + " }";
+			log.info(metaRecord);
+			return true;
+		}
+		catch (Exception e) {
+			log.error(" " + e);
+			return false;
+		}
+	}
 }

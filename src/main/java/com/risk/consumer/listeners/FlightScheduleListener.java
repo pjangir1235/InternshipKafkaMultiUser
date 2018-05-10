@@ -8,14 +8,13 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.risk.consumer.model.FlightScheduleDTO;
 import com.risk.util.KakfaConsumerSelection;
-
-@Component
+@Service
 public class FlightScheduleListener {
 
 	@Autowired
@@ -24,7 +23,7 @@ public class FlightScheduleListener {
     private String topicName;
 
     private String groupId="flightSchedule";
-  public List<FlightScheduleDTO> start(long startingOffset, long size, int key) {
+  public List<FlightScheduleDTO> start(long startingOffset,  int key) {
 
     List<FlightScheduleDTO> flightSchedule = new ArrayList<>();
     System.out.println("startingOffset + "+startingOffset);
