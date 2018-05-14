@@ -1,0 +1,83 @@
+.sign-in-form {
+	padding: 1rem 1.5em;
+	border-radius: .5rem;
+	background-color: rgb(105, 103, 102);
+	width: 400px;
+	height: 400px;
+	opacity: .86;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.title-in-form {
+	color: blueviolet;
+	background-color: rgb(83, 78, 78);
+}
+
+.title-in-form h3 {
+	color: white;
+	margin-bottom: 1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.sign-in-form h4 {
+	color: white;
+	margin-bottom: 1rem;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.sign-in-form label {
+	text-transform: uppercase;
+	color: #adadad;
+	letter-spacing: 1px;
+	font-weight: 600;
+	margin-bottom: 5px;
+	margin-top: 25px;
+}
+
+.sign-in-form input {
+	color: rgb(0, 0, 0);
+	height: 38px;
+	border-radius: 30px;
+}
+
+.sign-in-form input:focus {
+	opacity: .8;
+}
+
+.sign-in-form-username, .sign-in-form-password {
+	border: none;
+	opacity: .3;
+	transition: all ease .8s;
+}
+
+.sign-in-form-button {
+	border-radius: 30px;
+	border: 1px solid #fff;
+	color: #fff;
+	background-color: transparent;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	width: 100%;
+	padding: 1rem;
+	transition: all ease .4s;
+}
+
+.sign-in-form-button:hover {
+	background-color: #744ffa;
+	border-color: #2421e0;
+}
+
+.body-background {
+	background-image: url(../images/FedExLoginImage.png );
+}
+
+.bar {
+	display: grid;
+}

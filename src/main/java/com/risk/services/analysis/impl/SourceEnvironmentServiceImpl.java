@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.risk.constants.CommonConstant;
 import com.risk.consumer.model.AirportDTO;
@@ -16,20 +18,11 @@ import com.risk.result.model.SourceEnvironment;
 import com.risk.util.Calculation;
 import com.risk.util.LocalDateString;
 
+@Scope("prototype")
+@Service
 public class SourceEnvironmentServiceImpl {
-
-	public SourceEnvironmentServiceImpl() {
-		super();
-	}
-
-	@Autowired
-	LocalDateString convert;
-
-
-
 	@Autowired
 	Calculation calc;
-
 	@Autowired
 	AirportRecord airportRecord;
 
@@ -39,8 +32,12 @@ public class SourceEnvironmentServiceImpl {
 	private	AirportDTO airportData;
 	double result;
 
-	public SourceEnvironmentServiceImpl(StoreRecord rec) {
-		this.record=new StoreRecord();
+
+	public SourceEnvironmentServiceImpl() {
+		super();
+	}
+	public void setSourceEnvironmentServiceImpl(StoreRecord rec) {
+		this.record=rec;
 		data = record.getSchedule();
 		env = new SourceEnvironment();
 		airportData=new AirportDTO();
@@ -49,15 +46,15 @@ public class SourceEnvironmentServiceImpl {
 
 	public void getValue(Environment envData) {
 		env.setNoWeather(0);
-		env.setMsgNoWeather("Out of 5\n Got Weather Report");
+		env.setMsgNoWeather(CommonConstant.OUTOF5+"Got Weather Report");
 		if (Integer.parseInt(envData.getWindSpeed()) > 30) {
-			result = calc.getPercentageGreater(Integer.parseInt(envData.getWindSpeed()) - 30, 50, 4);
+			result = calc.getPercentageGreater(Integer.parseInt(envData.getWindSpeed()) - 30.0, 50, 4);
 			env.setWindSpeed(result);
 		}
 		else
 			env.setWindSpeed(0);
 		env.setMsgWindSpeed(
-		                "Out of 4\n Wind Speed is " + envData.getWindSpeed() + " " + envData.getUnit().getWindSpeed());
+		                CommonConstant.OUTOF4+"Wind Speed is " + envData.getWindSpeed() + " " + envData.getUnit().getWindSpeed());
 
 		if (Integer.parseInt(envData.getVisibility()) < 15) {
 			result = calc.getPercentage(Double.parseDouble(envData.getVisibility()), 15, 5);
@@ -65,7 +62,7 @@ public class SourceEnvironmentServiceImpl {
 		}
 		else
 			env.setVisibility(0);
-		env.setMsgVisibility("Out of 5\n" + "The Visibility of Airport is " + envData.getVisibility() + " "
+		env.setMsgVisibility(CommonConstant.OUTOF5+ "The Visibility of Airport is " + envData.getVisibility() + " "
 		                + envData.getUnit().getVisibility());
 		if (Integer.parseInt(envData.getTemperature()) < 10) {
 			result = calc.getPercentage(Double.parseDouble(envData.getTemperature()), 15, 4);
@@ -73,7 +70,7 @@ public class SourceEnvironmentServiceImpl {
 		}
 		else
 			env.setWinterOper(0);
-		env.setMsgWinterOper("Out of 4\n" + "The Temperature of the Location is " + envData.getTemperature() + " "
+		env.setMsgWinterOper(CommonConstant.OUTOF4+ "The Temperature of the Location is " + envData.getTemperature() + " "
 		                + envData.getUnit().getTemperature());
 		record.setEnvSource(env);
 	}
@@ -83,23 +80,22 @@ public class SourceEnvironmentServiceImpl {
 		Iterable<AirportDTO> itr = airportList;
 		Iterator<AirportDTO> iter = itr.iterator();
 		while (iter.hasNext()) {
-
 			airportData = iter.next();
 			if (airportData.getAirportCode().equals(data.getDestinationAirportCode()))
 				if (airportData.getIsMountain()) {
 					env.setMountain(4);
 					env.setMsgMountain("Mountain Area");
-					break;
+
 				}
 				else {
 					env.setMountain(0);
 					env.setMsgMountain("No Mountain Area");
-					break;
-				}
-		}
 
+				}
+			break;
+		}
 		data.getTimeDeparture();
-		LocalTime departureTime = convert.stringtoLocalTime(data.getTimeDeparture());
+		LocalTime departureTime = LocalDateString.stringtoLocalTime(data.getTimeDeparture());
 		int timeOfFlight = departureTime.getHour();
 		if (timeOfFlight < 19 && timeOfFlight >= 5)
 			env.setNightOperation(0);
@@ -111,13 +107,13 @@ public class SourceEnvironmentServiceImpl {
 			env.setNightOperation(3);
 		env.setMsgNightOper("Out of 3\n Opeartion at aprox " + timeOfFlight);
 		env.setNoWeather(5);
-		env.setMsgNoWeather("Out of 5\n" + CommonConstant.NOWEATHER);
+		env.setMsgNoWeather(CommonConstant.OUTOF5+ CommonConstant.NOWEATHER);
 		env.setWindSpeed(0);
-		env.setMsgWindSpeed("Out of 4\n" + CommonConstant.NOWEATHER);
+		env.setMsgWindSpeed(CommonConstant.OUTOF4+ CommonConstant.NOWEATHER);
 		env.setVisibility(0);
-		env.setMsgVisibility("Out of 5\n" + CommonConstant.NOWEATHER);
+		env.setMsgVisibility(CommonConstant.OUTOF5+ CommonConstant.NOWEATHER);
 		env.setWinterOper(0);
-		env.setMsgWinterOper("Out of 4\n" + CommonConstant.NOWEATHER);
+		env.setMsgWinterOper(CommonConstant.OUTOF4+ CommonConstant.NOWEATHER);
 		record.setEnvSource(env);
 	}
 }

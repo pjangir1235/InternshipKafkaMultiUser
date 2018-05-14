@@ -16,12 +16,11 @@ public class AircraftChecklistDispatcher {
   private static final Logger log = LoggerFactory.getLogger(AircraftChecklistDispatcher.class);
 
   @Autowired private KafkaTemplate<Integer, AircraftChecklist> kafkaTemplate;
-  @Autowired StoreRecord record;
 
   public boolean dispatch(AircraftChecklist craft,StoreRecord rec) {
     try {
       SendResult<Integer, AircraftChecklist> sendResult =
-          kafkaTemplate.sendDefault(craft.getChecklistId(), craft).get();
+          kafkaTemplate.sendDefault(rec.getKey(), craft).get();
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
       rec.setChecklistOffset((int)recordMetadata.offset());
       String metaRecord =

@@ -17,8 +17,6 @@ public class EnvironmentDispatcher {
 
 	@Autowired
 	private KafkaTemplate<Integer, Environment> kafkaTemplate;
-	@Autowired
-	StoreRecord record;
 
 	public boolean dispatch(Environment env, StoreRecord rec) {
 		try {

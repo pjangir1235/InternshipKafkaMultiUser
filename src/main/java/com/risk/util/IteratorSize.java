@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class IteratorSize {
 
-    public int size(Iterable<?> it) {
-	  if (it instanceof Collection)
-	    return ((Collection<?>)it).size();
-	  int i = 0;
-	  for (Object obj : it) i++;
-	  return i;
+	public int size(Iterable<?> it) {
+		if (it instanceof Collection)
+			return ((Collection<?>) it).size();
+		int i = 0;
+		for (Object obj : it)
+			if(obj!=null)
+				i++;
+		return i;
 	}
 }

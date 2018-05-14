@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LocalDateString {
+	private LocalDateString() {
+	}
+
 	public static String localDateToString(LocalDate date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		return (date).format(formatter);
@@ -24,9 +27,5 @@ public class LocalDateString {
 
 	public static LocalTime stringtoLocalTime(String time) {
 		return LocalTime.parse(time, DateTimeFormatter.ISO_LOCAL_TIME);
-	}
-
-	public static void main(String[] args) {
-		System.out.println(LocalDateString.stringToLocalDate("2015-05-10"));
 	}
 }

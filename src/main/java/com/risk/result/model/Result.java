@@ -7,7 +7,7 @@ public class Result {
   double aircraft;
   double human;
   double finalPercent;
-  String Conclusion;
+  String finalConclusion;
 
   public double getProficiency() {
     return proficiency;
@@ -57,18 +57,18 @@ public class Result {
     this.finalPercent = finalPercent;
   }
 
-  public String getConclusion() {
-    return Conclusion;
+  public String getFinalConclusion() {
+    return finalConclusion;
   }
 
-  public void setConclusion(String conclusion) {
-    Conclusion = conclusion;
+  public void setFinalConclusion(String conclusion) {
+    finalConclusion = conclusion;
   }
 
   public Result() {
     super();
   }
 
-@Override public String toString(){return "Result [proficiency=" + proficiency + ", sourceEnvironment=" + sourceEnvironment + ", destinationEnvironment=" + destinationEnvironment + ", aircraft=" + aircraft + ", human=" + human + ", finalPercent=" + finalPercent + ", Conclusion=" + Conclusion + "]";}
+@Override public String toString(){return "Result [proficiency=" + proficiency + ", sourceEnvironment=" + sourceEnvironment + ", destinationEnvironment=" + destinationEnvironment + ", aircraft=" + aircraft + ", human=" + human + ", finalPercent=" + finalPercent + ", Conclusion=" + finalConclusion + "]";}
 
 }

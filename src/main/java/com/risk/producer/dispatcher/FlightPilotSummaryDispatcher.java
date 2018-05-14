@@ -1,7 +1,5 @@
 package com.risk.producer.dispatcher;
 
-import java.util.Random;
-
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +17,6 @@ public class FlightPilotSummaryDispatcher {
 
 	@Autowired
 	private KafkaTemplate<Integer, FlightPilotSummary> kafkaTemplate;
-	// @Autowired StoreRecord record;
-	Random randon = new Random();
 
 	public boolean dispatch(FlightPilotSummary summary, StoreRecord record) {
 		try {

@@ -19,7 +19,6 @@ public class KafkaFlightScheduleProducerConfig {
 
   @Bean
   public KafkaTemplate<Integer, FlightSchedule> flightScheduleKafkaTemplate() {
-     System.out.println("Piyush Jangir");
     KafkaTemplate<Integer, FlightSchedule> kafkaTemplate = new KafkaTemplate<>(producerFactory());
     kafkaTemplate.setDefaultTopic(topic);
     return kafkaTemplate;

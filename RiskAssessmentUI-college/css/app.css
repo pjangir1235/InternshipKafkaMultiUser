@@ -1,0 +1,586 @@
+.text-center {
+	margin-left: 46%;
+	text-align: left;
+}
+
+.fedex-image {
+	background-image: url(../images/fedexImage.png);
+	background-size: 110px;
+	background-repeat: no-repeat;
+	margin-top: 13px;
+	margin-left: 2%;
+}
+
+.vl {
+	border-left: 1px solid rgb(234, 98, 20);
+	border-right: 1px dashed rgb(234, 98, 20);
+	height: 54px;
+	width: 1px;
+	padding: 0px;
+	border-spacing: 0px;
+}
+
+.tool-logo {
+	background-image: url(../images/FlighRiskLogo.png);
+	background-size: 150px;
+	background-repeat: no-repeat;
+	margin-top: 1px;
+	margin-left: 20px;
+}
+
+.top-bar-left {
+	height: 53px;
+	/* border: 1px solid red; */
+	width: 40px;
+}
+
+.top-bar-left-logo {
+	height: 53px;
+	/* border: 1px solid red; */
+	width: 100%;
+	max-width: 600px;
+}
+
+.top-bar {
+	background: rgb(230, 230, 230);
+	width: 100%;
+	height: 53px;
+	margin-bottom: 0px;
+}
+
+.top-bar-right {
+	width: 100px;
+}
+
+.middle-design {
+	/* background-color: rgb(255, 255, 255); */
+	width: 100%;
+	height: 800px;
+}
+
+.main-design {
+	
+}
+
+.middle-design::before {
+	content: "";
+	/* display: ; */
+	position: absolute;
+	top: 59px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 800px;
+	width: 100%;
+	max-width: 1490;
+	background-repeat: no-repeat;
+	background: rgb(202, 202, 202);
+	z-index: -1;
+	background: url(../images/mainBackground1.jpg) center center;
+}
+
+.log-out-main-design {
+	font-size: 16px;
+	font-variant-caps: petite-caps;
+	font-size: 23px;
+}
+
+.logout-position {
+	margin-top: 10px;
+	margin-left: 250px;
+	font-size: 25px;
+	font-style: italic
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.demo {
+	position: relative; /*so I could use 'top: 30px' */
+	top: 2px;
+	/*so you can see it in demo*/
+	width: 100%;
+	border-top: 2px solid rgb(49, 34, 129);
+}
+
+.div-schedule-color {
+	position: relative;
+	/* background-color:transparent; */
+	border: 0px solid slategrey;
+	top: 70px;
+	left: 8%;
+	right: 30px;
+	text-align: center;
+	width: 84%;
+	max-width: 1350px;
+	background-color: transparent;
+}
+
+[type="date"] {
+	background: #fff
+		url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+		97% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+	opacity: 0;
+}
+
+[type="date"]:hover {
+	border: 2px solid rgb(49, 34, 129);
+}
+
+.input-date {
+	border: 1px solid #c4c4c4;
+	border-radius: 7px;
+	background-color: #fff;
+	padding: 3px 5px;
+	box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+	width: 190px;
+}
+
+.text-label {
+	text-align: left;
+	background: none;
+	font-size: 25px;
+	margin-left: 10px;
+	color: rgb(234, 98, 20);
+	font-weight: 500;
+}
+
+.selection-location {
+	width: 83%;
+	/* margin-left: 0%; */
+	border-radius: 7px;
+}
+
+.selection-location:hover {
+	border: 2px solid rgb(49, 34, 129);
+}
+
+.fw-body {
+	position: relative;
+	top: 50px;
+	width: 884px;
+}
+
+.schedule-table-location {
+	position: relative;
+	top: 120px;
+	left: 12%;
+	width: 70%;
+	height: 400px;
+}
+
+.schedule-table {
+	width: 100%;
+}
+
+.schedule-table thead th {
+	background-color: rgb(49, 34, 129);
+	opacity: 0.8;
+}
+
+.schedule-table {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.dataTables_filter {
+	/* display: none; */
+	
+}
+
+.dataTables_filter input {
+	width: 250px;
+	border-radius: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+	float: left;
+	text-align: left;
+}
+
+.dataTables_filter input:hover {
+	border: 2px solid rgb(49, 34, 129);
+}
+
+tbody, thead tr {
+	display: block;
+}
+
+tbody {
+	max-height: 399px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+tbody td, thead th {
+	width: 156px;
+}
+
+thead th:last-child {
+	width: 160px;
+}
+
+/* //////////////////////////////////////////////////////////Report Analysis////////////////////////////////////////////////////////*/
+.top-div-analysis {
+	width: 100%;
+	max-width: 1550px;
+	height: 80px;
+	/* border:  1px solid black; */
+	margin-top: 18px;
+	border-radius: 8px;
+	border-bottom: 2px solid rgb(49, 34, 129);
+	/* background: rgba(77, 21, 139, 1); */
+}
+
+.middle-div-analysis {
+	width: 100%;
+	max-width: 1500x;
+	border-bottom: 3px solid rgb(240, 237, 237);
+	height: 100%;
+	max-height: 570px;
+	border-top: 3px solid rgb(240, 237, 237);
+	margin-top: 10px;
+	margin-right: 10px;
+	/* border:  1px solid black; */
+}
+
+.bottom-div-analysis {
+	width: 100%;
+	max-width: 1490px;
+	height: 100%;
+	max-height: 100px;
+	/* border:  1px solid black; */
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.middle-table-analysis {
+	margin-top: 8px;
+	background-color: rgba(0, 0, 0, 0.0);
+	height: 100%;
+	max-height: 590px;
+	width: 100%;
+	max-width: 1500;
+	/* border: 1px solid green; */
+}
+
+.middle-table-analysis-td {
+	width: 29%;
+	max-width: 500px;
+	padding: 25px;
+	height: 282px;
+	/* border: 1px solid blue; */
+	border-right: 3px solid rgb(240, 237, 237);
+	/* border: 1px solid blue; */
+}
+
+.middle-table-analysis-td:last-child {
+	border-right: 0px solid transparent;
+}
+
+.middle-table-analysis thead, .middle-table-analysis tbody {
+	width: 100%;
+	max-width: 1500px;
+	height: 100%;
+	max-height: 550px;
+	background: rgba(0, 0, 0, 0.0);
+	border: 0px solid transparent;
+
+	/* border: 1px solid red; */
+}
+
+.div-middle {
+	/* border-bottom: 1px solid darkgreen; */
+	margin-top: auto;
+	height: 9 px;
+}
+
+.div-middle-first {
+	float: left;
+	height: 38px;
+	/* border: 1px solid yellow; */
+	/* border-right: 1px solid yellow; */
+	width: 93%;
+	font-size: 20px;;
+}
+
+.div-middle-first1 {
+	float: left;
+	height: 38px;
+	/* border: 1px solid yellow; */
+	/* border-right: 1px solid yellow; */
+	width: 7%;
+	font-size: 20px;
+}
+/* , */
+.div-middle-second {
+	border-spacing: 10px;
+	padding: 8px;
+	float: right;
+	height: 38px;
+	/* border: 1px solid violet; */
+	font-size: 10px;
+	width: 7%;
+}
+
+/* ///////////////////////// */
+.top-div-analysis-partition {
+	/* border: 1px solid violet; */
+	height: 40px;
+}
+
+.top-div-analysis-left {
+	/* border: 2px solid yellow; */
+	height: 40px;
+	float: left;
+	width: 30%;
+	max-width: 600px;
+	margin-left: 3%;
+	color: rgb(234, 98, 20);
+}
+
+.bottom-div-analysis-partition-first {
+	/* border: 1px solid violet; */
+	height: 40px;
+}
+
+.bottom-div-analysis-left-first {
+	/* border: 2px solid yellow; */
+	height: 40px;
+	float: left;
+	width: 20%;
+}
+
+.numberCircle {
+	border-radius: 40%;
+	behavior: url(PIE.htc);
+	/* remove if you don't care about IE8 */
+	width: 40px;
+	height: 27px;
+	padding: 3px;
+	background: rgb(234, 98, 20);
+	border: 2px solid rgb(233, 151, 0);
+	color: rgb(0, 0, 0);
+	text-align: center;
+	font: 14px Arial, sans-serif;
+	font-family: monospace;
+}
+
+h5 {
+	float: left;
+	color: rgb(234, 98, 20);
+	margin-left: 50px;
+}
+
+h6 {
+	margin-top: 4px;
+	color: rgb(49, 34, 129);
+}
+
+h4 {
+	float: left;
+	color: rgb(5, 206, 45);
+	margin-left: 40px;
+}
+
+.modified-h5 {
+	float: left;
+	color: rgb(49, 34, 129);
+	margin-left: 10px;
+	margin-top: 4px;
+}
+
+.dataTables_filter input {
+	height: 35px;
+	border-radius: 8px;
+}
+/* //////////popup////// */
+.reveal {
+	width: 100%;
+	max-width: 500px;
+	height: 100%;
+	max-height: 200px;
+	border-radius: 15px;
+	color: rgb(234, 98, 20);
+	background-color: rgba(0, 0, 0, 0.8);
+	border: 1px solid rgb(223, 6, 6);
+	/* box-shadow: 0px 0px transparent, 0.1em -0.1em rgb(223, 6, 6); */
+	padding: 0px;
+}
+
+.reveal:hover {
+	border: 1.5px solid white;
+	background-color: rgba(0, 0, 0, 0.85);
+}
+
+.pop-up-top {
+	margin-left: 0px;
+	width: 100%;
+	height: 25%;
+	text-align: center;
+	font-size: 27px;
+	border-bottom: 1px solid rgb(223, 6, 6);
+	padding: 10px;
+	border-radius: 15px;
+	font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.pop-up-mid {
+	width: 100%;
+	text-align: center;
+	font-size: 100%;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	color: rgb(218, 213, 243);
+	border-top: 1px solid rgb(223, 6, 6);
+	border-radius: 8px;
+}
+
+/* /////////////////////////////////////analysisHome////////////////////////////////////// */
+.top-div-menu {
+	width: 100%;
+	max-width: 1550px;
+	height: 38px;
+	margin-top: 5px;
+	background: rgb(49, 34, 129);
+	position: relative;
+}
+
+.top-div-menu1 {
+	/* border: 1px solid violet; */
+	height: 100%;
+	padding: 0px;
+	float: left;
+}
+
+.warning {
+	color: rgb(240, 237, 237);
+	border-radius: 1px;
+	position: static;
+}
+
+.top-div-menu-side {
+	/* border: 1px solid violet; */
+	float: left;
+	height: 100%;
+	width: 15%;
+	padding: 0px;
+	margin-left: 00px;
+}
+
+.top-div-menu-side-right {
+	width: auto;
+	float: right;
+	/* border: 2px solid violet; */
+	position: absolute;
+	height: 100%;
+	right: 1px;
+	padding: 0px;
+}
+
+.hoverValue:hover {
+	border: 3px solid rgb(251, 175, 2);
+	border-bottom: 1px solid rgb(251, 175, 2);
+	border-right: 1px solid rgb(251, 175, 2);
+}
+
+.hoverValue1:hover {
+	border: 2px solid rgb(49, 34, 129);
+	border-top: 1px solid rgb(49, 34, 129);
+	border-right: 1px solid rgb(49, 34, 129);
+}
+
+/* //////////////profecienct/////////////// */
+.div-middle-mainValue {
+	width: 800px;
+	margin-left: 400px;
+	margin-top: 4%;
+	/* border-top:1px solid red; */
+}
+
+.title-bar1 {
+	text-align: center;
+	margin-top: 10%;
+	font-size: 25px;
+	background: rgb(234, 98, 20);
+	color: rgb(49, 34, 129);
+	border-radius: 2px;
+	height: 100%;
+	width: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	font-weight: bolder;
+	font-style: italic;
+	font-family: Arial, Helvetica, sans-serif;
+	border: 1px outset rgb(254, 89, 0);
+	/* border:1px solid rgba(172, 72, 5,1); */
+}
+
+.bottom-div-analysis-partition-second {
+	/* border: 1px solid violet; */
+	margin-top: 17%;
+	margin-left: 400px;;
+	width: 60%;
+	max-width: 800px;
+	background-color: rgba(104, 102, 102, 0.9);
+	height: 40px;
+	border-radius: 3px;
+	border-bottom: 1px solid whitesmoke;
+	border-right: 1px solid whitesmoke;
+}
+
+.bottom-div-analysis-left-second {
+	/* border: 2px solid yellow; */
+	height: 40px;
+	float: left;
+	width: 50%;
+	margin-top: 0px;
+	padding: 4px;
+}
+
+.bottom-div-analysis-partition-second-all {
+	/* border: 1px solid violet; */
+	margin-top: 23%;
+	margin-left: 400px;
+	position: relative;
+	width: 60%;
+	max-width: 800px;
+	background-color: rgba(104, 102, 102, .9);
+	height: 40px;
+	border-radius: 3px;
+	border-bottom: 1px solid whitesmoke;
+	border-right: 1px solid whitesmoke;
+}
+
+.make-middle {
+	margin: 0px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%)
+}
+
+
+/* //////////aircraftData */
+.tableAircraft{
+	border-radius: 5 px;
+
+}
+.tableAircraft tr{
+	background-color: rgb(234, 98, 20);
+	border-radius: 5 px;
+}

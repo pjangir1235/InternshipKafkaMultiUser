@@ -6,5 +6,4 @@ public interface AircraftService {
 
   void getAircraftData(String aircraftCode, StoreRecord rec);
 
-  void getAllAircraftCodeforType(String aircraftCode);
 }

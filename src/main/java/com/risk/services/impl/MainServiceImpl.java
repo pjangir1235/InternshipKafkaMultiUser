@@ -2,7 +2,6 @@ package com.risk.services.impl;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +9,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -63,6 +63,8 @@ public class MainServiceImpl implements MainService {
 	private AircraftService aircraftData;
 
 	@Autowired
+	private ApplicationContext cfx;
+	@Autowired
 	private AircraftChecklistService aircraftChecklistData;
 
 	@Autowired
@@ -78,11 +80,7 @@ public class MainServiceImpl implements MainService {
 	private EnvironmentService environmentData;
 
 	@Autowired
-	StoreRecord record;
-	@Autowired
 	AirportRecord recordAirport;
-	@Autowired
-	AnalysisServiceImpl analysisService;
 
 	@Autowired
 	FlightScheduleListener flightSchedule;
@@ -100,6 +98,7 @@ public class MainServiceImpl implements MainService {
 
 	@Autowired
 	AircraftChecklistListener aircraftChecklist;
+
 	@Autowired
 	EnvironmentListener environment;
 
@@ -113,8 +112,19 @@ public class MainServiceImpl implements MainService {
 		StoreRecord rec = new StoreRecord();
 		setKey(rec);
 		aircraftData.getAircraftData(aircraftCode, rec);
-		System.out.println("Offset is " + rec.getAircraftOffset());
 		return aircraft.start(rec.getAircraftOffset(), rec.getKey());
+	}
+
+
+	public void restOfEachCrewData(StoreRecord rec,CrewDTO crew,LocalDate date)
+	{
+		try {
+			restDetailData.getCrewRestDetail(crew.getCrewMemberId(), LocalDateString.localDateToString(date),
+			                rec);
+		}
+		catch (Exception e) {
+			logger.error(CommonConstant.ERROR + e);
+		}
 	}
 
 	@Override
@@ -123,8 +133,8 @@ public class MainServiceImpl implements MainService {
 		StoreRecord rec = new StoreRecord();
 		setKey(rec);
 		rec.setSchedule(flightData);
-		AnalysisServiceImpl analysisService = new AnalysisServiceImpl(rec);// check this out
-
+		AnalysisServiceImpl analysisService = cfx.getBean(AnalysisServiceImpl.class);
+		analysisService.setAnalysisServiceImpl(rec);
 		LocalDate date;
 		try {
 			CrewDTO crew = null;
@@ -133,24 +143,14 @@ public class MainServiceImpl implements MainService {
 
 			rec.setRestDetailCount(crews.size());
 			rec.setRestDetailTotal(crews.size());
-			System.out.println(crews.size());
 			Iterable<CrewDTO> itr = crews;
 			Iterator<CrewDTO> iter = itr.iterator();
 			while (iter.hasNext()) {
-				System.out.println("RestDetail " + rec.getRestDetailCount());
 				rec.setRestDetailCount(rec.getRestDetailCount() - 1);
-				System.out.println("RestDetail " + rec.getRestDetailCount());
 				date = LocalDateString.stringToLocalDate(flightData.getDateOfDeparture());
 				date = date.minusDays(1);
 				crew = iter.next();
-				try {
-					restDetailData.getCrewRestDetail(crew.getCrewMemberId(), LocalDateString.localDateToString(date),
-					                rec);
-				}
-				catch (Exception e) {
-					System.out.println("Error to ask crew detail "+e);
-					logger.error(CommonConstant.ERROR + e);
-				}
+				restOfEachCrewData(rec,crew,date);
 			}
 			List<RestDetailDTO> detail = restDetail.start(rec.getRestCrewMinOffset(), rec.getKey());
 			CrewTotalServiceImpl restService = analysisService.getCrewTotalObject();
@@ -159,7 +159,6 @@ public class MainServiceImpl implements MainService {
 
 		}
 		catch (Exception e) {
-			System.out.println("Rest Detail  "+e);
 			logger.error(CommonConstant.ERROR + e);
 		}
 		// done
@@ -177,6 +176,7 @@ public class MainServiceImpl implements MainService {
 				flightScheduleData.getFlightSchedulePilotData(pilot.getPilotId(), pilot.getPilotDesignationCode(),
 				                flightData.getDateOfDeparture(), rec);
 			}
+
 			CaptainAnalysisServiceImpl flightCaptainService = analysisService.getCaptainAnalysisObject();
 			flightCaptain.start(rec.getFlightCaptainMinOffset(), rec.getKey(), flightCaptainService);
 			PilotAnalysisServiceImpl flightPilotService = analysisService.getPilotAnalysisObject();
@@ -222,25 +222,23 @@ public class MainServiceImpl implements MainService {
 		environment.start(rec.getEnvMinOffset(), rec.getKey(), serviceSource, serviceDestination, flightData);
 		analysisService.startCalculation();
 
-		return null;
+		return rec.getFinalData();
 
 	}
 
 	@Override
 	public Environment getEnvironmentValues(String stationCode) {
 		RestTemplate rest = new RestTemplate();
-		Environment env = rest.getForObject(Urls.ENVURLSTART + stationCode + Urls.ENVURLEND, Environment.class);
-		return env;
+		return rest.getForObject(Urls.ENVURLSTART + stationCode + Urls.ENVURLEND, Environment.class);
 	}
 
 	@Override
 	public List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req) {
 
-		List<FlightScheduleDTO> flight = new ArrayList<>();
+		List<FlightScheduleDTO> flight ;
 		StoreRecord rec = new StoreRecord();
 		setKey(rec);
 		flightScheduleData.getFlightScheduleData(req.getLocation(), req.getDate(), rec);
-		System.out.println("Min : " + rec.getFlightMinOffset() + " max ; " + rec.getFlightMaxOffset());
 		flight = flightSchedule.start(rec.getFlightMinOffset(), rec.getKey());
 
 		return flight;

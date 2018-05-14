@@ -17,8 +17,7 @@ public class RestDetailDispatcher {
 
 	@Autowired
 	private KafkaTemplate<Integer, RestDetail> kafkaTemplate;
-	@Autowired
-	StoreRecord record;
+
 
 	public boolean dispatch(RestDetail craft, StoreRecord record) {
 		try {

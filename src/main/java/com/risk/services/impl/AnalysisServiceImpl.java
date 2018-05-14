@@ -2,6 +2,8 @@ package com.risk.services.impl;
 
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.risk.models.AirportRecord;
@@ -22,9 +24,12 @@ import com.risk.services.analysis.impl.PilotAnalysisServiceImpl;
 import com.risk.services.analysis.impl.SourceEnvironmentServiceImpl;
 import com.risk.util.Calculation;
 
+@Scope("prototype")
 @Service
 public class AnalysisServiceImpl {
 
+	@Autowired
+	private ApplicationContext cfx;
 	@Autowired
 	AirportRecord recordAirport;
 	private AircraftAnalysisServiceImpl aircraft;
@@ -38,10 +43,8 @@ public class AnalysisServiceImpl {
 	private AircraftCheckListDetail aircraftCheckList;
 	private CaptainDetail captainDetail;
 	private HumanPerformance crewTotal;
-	private DestinationEnvironment destEnv;
 	private PilotDetail pilotDetail;
 	private SourceEnvironment sourceEnv;
-	private FinalAnalysisData finalData;
 	private Result result;
 	double value;
 	double total;
@@ -60,33 +63,21 @@ public class AnalysisServiceImpl {
 		super();
 	}
 
-	public AnalysisServiceImpl(StoreRecord rec) {
-		System.out.println("Analysis service constructor");
+	public void setAnalysisServiceImpl(StoreRecord rec) {
 		this.record = rec;
-		System.out.println(recordAirport.toString());
-		aircraft = new AircraftAnalysisServiceImpl(record);
-		captain = new CaptainAnalysisServiceImpl(record);
-		System.out.println(recordAirport.toString());
-		crew = new CrewTotalServiceImpl(record);
-		System.out.println(recordAirport.toString());
-		envDestination = new DestinationEnvironmentServiceImpl(record);
-		System.out.println("rest pos4");
-		envSource = new SourceEnvironmentServiceImpl(record);
-		System.out.println("rest pos5");
-		pilot = new PilotAnalysisServiceImpl(record);
-		System.out.println("rest pos6");
+		aircraft = cfx.getBean(AircraftAnalysisServiceImpl.class);
+		aircraft.setAircraftAnalysisServiceImpl(record);
+		captain = cfx.getBean(CaptainAnalysisServiceImpl.class);
+		captain.setCaptainAnalysisServiceImpl(record);
+		crew = cfx.getBean(CrewTotalServiceImpl.class);
+		crew.setCrewTotalServiceImpl(record);
+		envDestination = cfx.getBean(DestinationEnvironmentServiceImpl.class);
+		envDestination.setDestinationEnvironmentServiceImpl(record);
+		envSource = cfx.getBean(SourceEnvironmentServiceImpl.class);
+		envSource.setSourceEnvironmentServiceImpl(record);
+		pilot = cfx.getBean(PilotAnalysisServiceImpl.class);
+		pilot.setPilotAnalysisServiceImpl(record);
 	}
-	// public void initializeAnalysis(StoreRecord rec) {
-
-	//
-	// aircraft.setValues();
-	// captain.setValues();
-	// crew.setValue();
-	// envDestination.setValue();
-	// envSource.setValue();
-	// pilot.setValues();
-
-	// }
 
 	public void startCalculation() {
 		result = new Result();
@@ -94,29 +85,26 @@ public class AnalysisServiceImpl {
 		captain.finalCalc();
 		pilot.finalCalc();
 
-		// Some Code Missing
-
 		aircraftCheckList = record.getAircraftCheckList();
 		captainDetail = record.getCaptainDetail();
 		crewTotal = record.getCrewTotal();
-		destEnv = record.getEnvDestination();
+		DestinationEnvironment destEnv = record.getEnvDestination();
 		pilotDetail = record.getPilotDetail();
 		sourceEnv = record.getEnvSource();
 
-		// Proficiency
 		proficiency();
-		SourceEnvironment();
-		DestinationEnvironment();
-		Aircraft();
-		HumanPerformance();
-		FinalResult();
-		finalData = new FinalAnalysisData();
+		sourceEnvironment();
+		destinationEnvironmen();
+		aircraft();
+		humanPerformance();
+		finalResult();
+		FinalAnalysisData finalData = new FinalAnalysisData();
 		finalData.setAircraftCheckList(aircraftCheckList);
 		finalData.setCaptainDetail(captainDetail);
 		finalData.setCrewTotal(crewTotal);
-		finalData.setDestEnv(destEnv);
+		finalData.setEnvDestination(destEnv);
 		finalData.setPilotDetail(pilotDetail);
-		finalData.setSourceEnv(sourceEnv);
+		finalData.setEnvSource(sourceEnv);
 		finalData.setResult(result);
 		record.setFinalData(finalData);
 
@@ -161,14 +149,14 @@ public class AnalysisServiceImpl {
 
 	}
 
-	public void SourceEnvironment() {
+	public void sourceEnvironment() {
 		environment();
 		percentageSource = calc.getFinalPercentage(total, outOf, 9);
 		percentageInHundered = calc.getFinalPercentage(percentageSource, 9, 100);
 		result.setSourceEnvironment(percentageInHundered);
 	}
 
-	public void DestinationEnvironment() {
+	public void destinationEnvironmen() {
 		environment();
 		percentageDestination = calc.getFinalPercentage(total, outOf, 21);
 		percentageInHundered = calc.getFinalPercentage(percentageDestination, 21, 100);
@@ -218,7 +206,7 @@ public class AnalysisServiceImpl {
 		outOf += 5;
 	}
 
-	public void Aircraft() {
+	public void aircraft() {
 		value = aircraftCheckList.getDeIce();
 		value = calc.convertInFive(value, 3);
 		total = value;
@@ -242,7 +230,7 @@ public class AnalysisServiceImpl {
 		result.setAircraft(percentageInHundered);
 	}
 
-	public void HumanPerformance() {
+	public void humanPerformance() {
 		value = crewTotal.getDutyTime();
 		value = calc.convertInFive(value, 3);
 		total = value;
@@ -256,16 +244,16 @@ public class AnalysisServiceImpl {
 		result.setHuman(percentageInHundered);
 	}
 
-	public void FinalResult() {
+	public void finalResult() {
 		double finalPercentage = percentageAircraft + percentageDestination + percentageHuman + percentageProficiency
 		                + percentageSource;
 		result.setFinalPercent(DoubleRounder.round(finalPercentage, 2));
 		if (finalPercentage <= 33)
-			result.setConclusion("CLEAR");
+			result.setFinalConclusion("CLEAR");
 		else if (finalPercentage > 33 && finalPercentage <= 66)
-			result.setConclusion("NEED TO CHECK");
+			result.setFinalConclusion("NEED TO CHECK");
 		else
-			result.setConclusion("RISKY");
+			result.setFinalConclusion("RISKY");
 	}
 
 	public CrewTotalServiceImpl getCrewTotalObject() {

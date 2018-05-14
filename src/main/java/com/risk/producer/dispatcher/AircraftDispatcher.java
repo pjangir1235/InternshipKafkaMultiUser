@@ -19,7 +19,7 @@ public class AircraftDispatcher {
   public boolean dispatch(Aircraft craft ,StoreRecord rec) {
     try {
       SendResult<Integer, Aircraft> sendResult =
-          kafkaTemplate.sendDefault(Integer.valueOf(rec.getKey()), craft).get();
+          kafkaTemplate.sendDefault(rec.getKey(), craft).get();
 
       RecordMetadata recordMetadata = sendResult.getRecordMetadata();
       String metaRecord =

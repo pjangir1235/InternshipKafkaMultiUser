@@ -14,9 +14,7 @@ public class AirportLoader implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println("Hii");
     producer.getAiprotValues();
-    System.out.println("Hello");
     recordAirport.setUpdated(true);
   }
 }

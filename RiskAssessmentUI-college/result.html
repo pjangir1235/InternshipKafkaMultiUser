@@ -1,0 +1,73 @@
+<div class="div-middle-mainValue">
+	<div class="div-middle title-bar1">ANALYSIS &nbsp;&nbsp; RESULT</div>
+
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">
+			<h5>Proficiency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+		</div>
+		<div class="div-middle-first1" style="margin-top: 10px;">
+
+			<h6 ng-model='proficiency'>{{proficiency}}%</h6>
+		</div>
+
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">
+
+			<h5>Source Airport &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+		</div>
+		<div class="div-middle-first1" style="margin-top: 10px;">
+
+			<h6 ng-model='sourceEnv'>{{sourceEnv}}%</h6>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">
+
+			<h5>Dest. Airport&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+		</div>
+		<div class="div-middle-first1" style="margin-top: 10px;">
+
+			<h6 ng-model='destEnv'>{{destEnv}}%</h6>
+		</div>
+
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">
+
+			<h5>Aircraft &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+		</div>
+		<div class="div-middle-first1" style="margin-top: 10px;">
+
+			<h6 ng-model='aircraft'>{{aircraft}}%</h6>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">
+
+			<h5>Human Perf. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+		</div>
+		<div class="div-middle-first1" style="margin-top: 10px;">
+			<h6 ng-model='human'>{{human}}%</h6>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+<div class="bottom-div-analysis-partition-second ">
+	<div class="bottom-div-analysis-left-second">
+		<h4>Total &nbsp;&nbsp;</h4>
+		<h5 class="modified-h5 " ng-model='total'>{{total}}%</h5>
+	</div>
+	<div class="bottom-div-analysis-left-second ">
+		<h4>Conclusion &nbsp;</h4>
+		<h5 class="modified-h5 " ng-model='conclusion'>{{conclusion}}</h5>
+	</div>
+</div>
+
+<script>
+	$(document).foundation();
+</script>

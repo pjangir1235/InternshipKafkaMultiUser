@@ -17,15 +17,11 @@ public class FlightScheduleDispatcher {
 
 	@Autowired
 	private KafkaTemplate<Integer, FlightSchedule> kafkaTemplate;
-	@Autowired
-	StoreRecord record;
 
 	public boolean dispatch(FlightSchedule craft, StoreRecord rec) {
 
 		try {
-			System.out.println("kafkaTemplate : " + kafkaTemplate);
-			SendResult<Integer, FlightSchedule> sendResult = kafkaTemplate.sendDefault(new Integer(rec.getKey()), craft)
-			                .get();
+			SendResult<Integer, FlightSchedule> sendResult = kafkaTemplate.sendDefault(rec.getKey(), craft).get();
 
 			RecordMetadata recordMetadata = sendResult.getRecordMetadata();
 			if (rec.getFlightMinOffset() == -1)
@@ -34,7 +30,6 @@ public class FlightScheduleDispatcher {
 				rec.setFlightMaxOffset((int) recordMetadata.offset());
 			String metaRecord = "{offset - " + recordMetadata.offset() + " partition - " + recordMetadata.partition()
 			                + " TimeStamp - " + recordMetadata.timestamp() + " }";
-			System.out.println("MetaData : " + metaRecord);
 			log.info(metaRecord);
 			return true;
 		}

@@ -3,12 +3,15 @@ package com.risk.consumer.listeners;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.risk.constants.CommonConstant;
 import com.risk.consumer.model.AircraftChecklistDTO;
 import com.risk.util.KakfaConsumerSelection;
 
@@ -20,7 +23,7 @@ public class AircraftChecklistListener {
 	@Value("${kafka.topic-aircraftChecklist}")
 	String topicName;
 	String groupId = "aircraftChecklist";
-
+	 private static final Logger log = LoggerFactory.getLogger(AircraftChecklistListener.class);
 	public AircraftChecklistDTO start(long startingOffset, int key) {
 		AircraftChecklistDTO craft = new AircraftChecklistDTO();
 		KafkaConsumer<Integer, JsonNode> kafkaConsumer = craterKafka.setKafka(topicName, groupId.concat(key + ""),
@@ -28,23 +31,21 @@ public class AircraftChecklistListener {
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			while (true) {
-				ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
 
-				for (ConsumerRecord<Integer, JsonNode> record : records) {
-					JsonNode jsonNode = record.value();
+			ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
 
-					craft = mapper.treeToValue(jsonNode, AircraftChecklistDTO.class);
-					if (record.key() == key)
-						return craft;
-				}
+			for (ConsumerRecord<Integer, JsonNode> record : records) {
+				JsonNode jsonNode = record.value();
+
+				craft = mapper.treeToValue(jsonNode, AircraftChecklistDTO.class);
+				if (record.key() == key)
+					return craft;
 			}
+			return null;
 
 		}
 		catch (Exception ex) {
-			ex.printStackTrace();
-
-			System.out.println("Exception caught " + ex.getMessage());
+			log.error(CommonConstant.ERROR+ex);
 			return craft;
 		}
 		finally {
@@ -52,30 +53,4 @@ public class AircraftChecklistListener {
 		}
 	}
 
-	// private static final Logger log =
-	// LoggerFactory.getLogger(AircraftChecklistListener.class);
-	// @Autowired StoreRecord record;
-	//
-	// @Autowired AircraftAnalysisServiceImpl service;
-	// public final CountDownLatch countDownLatch1 = new CountDownLatch(3);
-	//
-	// @KafkaListener(
-	// topics = "${kafka.topic-aircraftChecklist}",
-	// containerFactory = "aircraftChecklistKafkaListenerContainerFactory"
-	// )
-	// public void aircraftChecklistListner(
-	// @Payload AircraftChecklistDTO checkList,
-	// @Header(KafkaHeaders.OFFSET) Integer offset,
-	// @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
-	// @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-	// log.info(
-	// "Processing topic = {}, partition = {}, offset = {}, workUnit = {}",
-	// topic,
-	// partition,
-	// offset,
-	// checkList);
-	//
-	// record.setAircraftChecklistCount(record.getAircraftChecklistCount() - 1);
-	// countDownLatch1.countDown();
-	// }
 }

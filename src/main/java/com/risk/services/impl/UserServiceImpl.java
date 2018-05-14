@@ -14,10 +14,13 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public boolean getUserData(String userName, String password) {
-	User user=new User();
+	User user;
+	boolean status;
     user = userRepo.findByName(userName, password);
     if(user.getUserName().equals(userName)&&user.getPassword().equals(password))
-    		return true;
-    return false;
+    		status=true;
+    else
+    	status=false;
+    return status;
   }
 }

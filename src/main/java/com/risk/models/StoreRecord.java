@@ -7,15 +7,9 @@ import com.risk.consumer.model.AircraftCodeDTO;
 import com.risk.consumer.model.AircraftDTO;
 import com.risk.consumer.model.FlightScheduleDTO;
 import com.risk.consumer.model.RestDetailDTO;
-import com.risk.result.model.AircraftCheckListDetail;
-import com.risk.result.model.CaptainDetail;
-import com.risk.result.model.DestinationEnvironment;
 import com.risk.result.model.FinalAnalysisData;
-import com.risk.result.model.HumanPerformance;
-import com.risk.result.model.PilotDetail;
-import com.risk.result.model.SourceEnvironment;
 
-public class StoreRecord {
+public class StoreRecord extends FinalAnalysisData {
 
 	private int key = 0;
 	private List<FlightScheduleDTO> flightSchedule;
@@ -38,53 +32,7 @@ public class StoreRecord {
 	private int envMinOffset = -1;
 
 	private int envMaxOffset = 0;
-	private AircraftCheckListDetail aircraftCheckList;
-	private CaptainDetail captainDetail;
-	private HumanPerformance crewTotal;
-	private DestinationEnvironment envDestination;
-	private PilotDetail pilotDetail;
-	public void setPilotDetail(PilotDetail pilotDetail) {
-		this.pilotDetail = pilotDetail;
-	}
-	public AircraftCheckListDetail getAircraftCheckList() {
-		return aircraftCheckList;
-	}
 
-	public void setAircraftCheckList(AircraftCheckListDetail aircraftCheckList) {
-		this.aircraftCheckList = aircraftCheckList;
-	}
-
-	public CaptainDetail getCaptainDetail() {
-		return captainDetail;
-	}
-
-	public void setCaptainDetail(CaptainDetail captainDetail) {
-		this.captainDetail = captainDetail;
-	}
-
-	public HumanPerformance getCrewTotal() {
-		return crewTotal;
-	}
-
-	public void setCrewTotal(HumanPerformance crewTotal) {
-		this.crewTotal = crewTotal;
-	}
-
-	public DestinationEnvironment getEnvDestination() {
-		return envDestination;
-	}
-
-	public void setEnvDestination(DestinationEnvironment envDestination) {
-		this.envDestination = envDestination;
-	}
-
-	public PilotDetail getPilotDetail() {
-		return pilotDetail;
-	}
-
-	public void resultFinal(PilotDetail pilotDetail) {
-		this.pilotDetail = pilotDetail;
-	}
 	public int getEnvMinOffset() {
 		return envMinOffset;
 	}
@@ -210,8 +158,6 @@ public class StoreRecord {
 	private List<AircraftCodeDTO> craftCode;
 	private List<Environment> env;
 
-
-	private SourceEnvironment envSource;
 	private FinalAnalysisData finalData;
 
 	private FlightScheduleDTO schedule;
@@ -244,14 +190,6 @@ public class StoreRecord {
 		init();
 	}
 
-
-	public SourceEnvironment getEnvSource() {
-		return envSource;
-	}
-
-	public void setEnvSource(SourceEnvironment envSource) {
-		this.envSource = envSource;
-	}
 
 	public FlightScheduleDTO getSchedule() {
 		return schedule;
@@ -319,17 +257,10 @@ public class StoreRecord {
 
 	private void init() {
 		aircraft = new ArrayList<>();
-
 		flightSchedule = new ArrayList<>();
 		restDetail = new RestDetailDTO();
 		craftCode = new ArrayList<>();
 		schedule = new FlightScheduleDTO();
-		aircraftCheckList = new AircraftCheckListDetail();
-		captainDetail = new CaptainDetail();
-		crewTotal = new HumanPerformance();
-		envDestination = new DestinationEnvironment();
-		pilotDetail = new PilotDetail();
-		envSource = new SourceEnvironment();
 		finalData = new FinalAnalysisData();
 		env = new ArrayList<>();
 	}

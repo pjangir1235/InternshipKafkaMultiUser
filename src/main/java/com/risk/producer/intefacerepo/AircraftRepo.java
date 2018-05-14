@@ -16,6 +16,6 @@ public interface AircraftRepo extends CrudRepository<Aircraft, Long> {
   @Query(value = Queries.AIRCRAFTBYTYPE)
   List<AircraftCodeType> findAllCodeforType(String aircraftCode);
 
-  @Query(value = Queries.AIRCRAFTBYCode)
+  @Query(value = Queries.AIRCRAFTBYCODE)
   List<Aircraft> findData(String aircraftCode);
 }

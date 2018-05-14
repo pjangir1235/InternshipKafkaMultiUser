@@ -1,0 +1,50 @@
+<div class="div-middle-mainValue">
+
+
+  <table class="unstriped tableAircraft">
+    <thead>
+      <tr>
+        <th width="150">Aircraft Id</th>
+        <th width="150">Aircraft Code</th>
+        <th width="150">Aircraft Type</th>
+        <th width="150">Manufacture Date</th>
+        <th width="150">Registration No</th>
+
+      </tr>
+    </thead>
+    <tbody ng-repeat="aircraft in aircraftData">
+      <tr>
+        <td>{{aircraft.aircraftId}}</td>
+        <td>{{aircraft.aircraftCode}}</td>
+        <td>{{aircraft.aircraftType}}</td>
+        <td>{{aircraft.manufactureDate}}</td>
+        <td>{{aircraft.registrationNo}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="loader-wrapper" ng-show='aircraftLoading'>
+  <div class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+
+  <div id="loader2" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+
+  <div id="loader3" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+  <div id="loader3" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+  <div id="loader4" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+</div>

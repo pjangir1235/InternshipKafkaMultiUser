@@ -1,0 +1,100 @@
+<div class="div-middle-mainValue">
+	<div class="div-middle title-bar1">PROFICIENCY</div>
+	<div class="div-middle">
+		<div class="div-middle-first" style="margin-top: 10px;">Captain with less than 200 in type</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency1" aria-controls="proficiency1" style="margin-top: 10px;">{{cTotal}}</a>
+		<div class="tiny reveal" id="proficiency1" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{cTotal}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first">Greater than 8 hours in the duty day
+		</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency2">{{cDutyTime}}</a>
+		<div class="tiny reveal" id="proficiency2" data-reveal>
+			<div class="pop-up-top" ng-if="false">REASON</div>
+			<div class="pop-up-mid">{{cDutyTimeMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first">Captain with less then 100 hours last 90 day in Type</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency3" aria-controls="proficiency3">{{cNinty}}</a>
+		<div class="tiny reveal" id="proficiency3" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{cNintyMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first">Single Pilot Flight</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency4" aria-controls="proficiency4">{{pNoPilot}}</a>
+		<div class="tiny reveal" id="proficiency4" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{pNoPilotMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="div-middle">
+		<div class="div-middle-first">First office with less than 100 hours last 90 day in Type</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency5" aria-controls="proficiency5">{{pNinty}}</a>
+		<div class="tiny reveal" id="proficiency5" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{pNintyMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first">First Officer with less than 200 Hours in Type</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency6" aria-controls="proficiency6">{{pTotal}}</a>
+		<div class="tiny reveal" id="proficiency6" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{pTotalMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first">Landing in last 15 Days by Captain (Less then 7)</div>
+		<a class="div-middle-second numberCircle" data-open="proficiency7" aria-controls="proficiency7">{{cLanding}}</a>
+		<div class="tiny reveal" id="proficiency7" data-reveal>
+			<div class="pop-up-top">REASON</div>
+			<div class="pop-up-mid">{{cLandingMsg}}</div>
+			<button class="close-button" data-close aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first"></div>
+		<div class="div-middle-second"></div>
+	</div>
+	<div class="div-middle">
+		<div class="div-middle-first"></div>
+		<div class="div-middle-second"></div>
+	</div>
+</div>
+<div class="bottom-div-analysis-partition-second-all ">
+	<div class="make-middle">
+		<h4>Percentage &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+		<h5 class="modified-h5 ">{{perProficiency}}%</h5>
+	</div>
+
+</div>
+<script>
+	$(document).foundation();
+</script>

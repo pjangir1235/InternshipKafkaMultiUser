@@ -1,6 +1,6 @@
-projectKey=RiskAssessment
+projectKey=RiskAssessmentMulti
 serverUrl=http://localhost:9000
-serverVersion=6.7.1.35068
-dashboardUrl=http://localhost:9000/dashboard/index/RiskAssessment
-ceTaskId=AWJhs8TxeMyTwgX0xi90
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWJhs8TxeMyTwgX0xi90
+serverVersion=7.1.0.11001
+dashboardUrl=http://localhost:9000/dashboard/index/RiskAssessmentMulti
+ceTaskId=AWNdIVhRD0tqwaqlRJZW
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWNdIVhRD0tqwaqlRJZW

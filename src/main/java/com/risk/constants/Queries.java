@@ -21,7 +21,7 @@ public class Queries {
   public static final String RESTDETAILBYID =
       "SELECT rest FROM RestDetail rest WHERE rest.memberId=?1 AND date=?2";
 
-  public static final String AIRCRAFTBYCode =
+  public static final String AIRCRAFTBYCODE =
 	      "SELECT aircraft from Aircraft aircraft WHERE aircraft.aircraftCode=?1";
 
 

@@ -6,9 +6,9 @@ public class FinalAnalysisData {
   private AircraftCheckListDetail aircraftCheckList;
   private CaptainDetail captainDetail;
   private HumanPerformance crewTotal;
-  private DestinationEnvironment destEnv;
+  private DestinationEnvironment envDestination;
   private PilotDetail pilotDetail;
-  private SourceEnvironment sourceEnv;
+  private SourceEnvironment envSource;
   private Result result;
 
   public FinalAnalysisData() {
@@ -16,9 +16,9 @@ public class FinalAnalysisData {
    aircraftCheckList=new AircraftCheckListDetail();
    captainDetail=new CaptainDetail();
     crewTotal=new HumanPerformance();
-   destEnv=new DestinationEnvironment();
+    envDestination=new DestinationEnvironment();
     pilotDetail=new PilotDetail();
-    sourceEnv=new SourceEnvironment();
+    envSource=new SourceEnvironment();
     result=new Result();
   }
 
@@ -46,12 +46,12 @@ public class FinalAnalysisData {
     this.crewTotal = crewTotal;
   }
 
-  public DestinationEnvironment getDestEnv() {
-    return destEnv;
+  public DestinationEnvironment getEnvDestination() {
+    return envDestination;
   }
 
-  public void setDestEnv(DestinationEnvironment destEnv) {
-    this.destEnv = destEnv;
+  public void setEnvDestination(DestinationEnvironment envDestination) {
+    this.envDestination = envDestination;
   }
 
   public PilotDetail getPilotDetail() {
@@ -62,12 +62,12 @@ public class FinalAnalysisData {
     this.pilotDetail = pilotDetail;
   }
 
-  public SourceEnvironment getSourceEnv() {
-    return sourceEnv;
+  public SourceEnvironment getEnvSource() {
+    return envSource;
   }
 
-  public void setSourceEnv(SourceEnvironment sourceEnv) {
-    this.sourceEnv = sourceEnv;
+  public void setEnvSource(SourceEnvironment envSource) {
+    this.envSource = envSource;
   }
 
   public Result getResult() {

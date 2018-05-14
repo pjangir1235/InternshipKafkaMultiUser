@@ -1,0 +1,46 @@
+<div class="div-middle-mainValue" style="width:800px">
+
+
+  <table class="unstriped tableAircraft">
+    <thead>
+      <tr>
+        <th width="200px">Pilot Id</th>
+        <th width="200px">Name</th>
+        <th width="200px">Designation Code</th>
+        <th width="200px">Mobile No</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="pilot in pilotData">
+      <tr>
+        <td>{{pilot.pilotId}}</td>
+        <td>{{pilot.pilotName}}</td>
+        <td>{{pilot.pilotDesignationCode}}</td>
+        <td>{{pilot.mobile}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="loader-wrapper" ng-show='environmentLoading'>
+  <div class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+
+  <div id="loader2" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+
+  <div id="loader3" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+  <div id="loader3" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+  <div id="loader4" class="loader">
+    <div class="roller"></div>
+    <div class="roller"></div>
+  </div>
+</div>
