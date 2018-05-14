@@ -25,91 +25,86 @@ import com.risk.services.interfaces.MainService;
 @RestController
 public class Controller {
 
-	private static final Logger logger = LoggerFactory.getLogger(Controller.class);
+  private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
-	@Autowired
-	MainService producer;
+  @Autowired MainService producer;
 
-	@Autowired
-	AirportRecord recordAirport;
+  @Autowired AirportRecord recordAirport;
 
-	@GetMapping("/aircraft/{code}")
-	public List<AircraftDTO> getaircraft(@PathVariable("code") String aircraftCode) {
-		List<AircraftDTO> list = null;
-		try {
-			list = producer.getAircraftValues(aircraftCode);
-			return list;
-		}
-		catch (Exception e) {
-			logger.error(CommonConstant.ERROR + e);
-			return list;
-		}
-	}
+  @GetMapping("/aircraft/{code}")
+  public List<AircraftDTO> getaircraft(@PathVariable("code") String aircraftCode) {
+    List<AircraftDTO> list = null;
+    try {
+      list = producer.getAircraftValues(aircraftCode);
+      return list;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return list;
+    }
+  }
 
-	@GetMapping("/airport")
-	public List<AirportDTO> getAirport() {
-		List<AirportDTO> list = null;
-		try {
-			if (!recordAirport.isUpdated()) {
-				producer.getAiprotValues();
-				recordAirport.setUpdated(true);
-			}
-			list = recordAirport.getAirport();
-			return list;
-		}
-		catch (Exception e) {
-			logger.error(CommonConstant.ERROR + e);
-			return list;
-		}
-	}
-	@PostMapping("/flightSchedule")
-	public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
-		List<FlightScheduleDTO> list = null;
-		try {
-			list = producer.getFlightScheduleValues(req);
-			return list;
-		}
-		catch (Exception e) {
-				logger.error(CommonConstant.ERROR + e);
-			return list;
-		}
-	}
-	@PostMapping("/user")
-	public boolean getUser(@RequestBody User user) {
-		boolean isValid = false;
-		try {
-			isValid = producer.getUserValues(user);
-			return isValid;
-		}
-		catch (Exception e) {
-			logger.error(CommonConstant.ERROR + e);
-			return isValid;
-		}
-	}
-	@PostMapping("analysis")
-	public FinalAnalysisData doAnalysis(@RequestBody FlightScheduleDTO schedule) {
-		FinalAnalysisData data = new FinalAnalysisData();
-		try {
-			data=producer.getAnalysisData(schedule);
-			return data;
-		}
-		catch (Exception e) {
-			logger.error(CommonConstant.ERROR + e);
-			return data;
-		}
-	}
-	@GetMapping("/environment/{code}")
-	public Environment getEnvironment(@PathVariable("code") String stationCode) {
-		Environment data = null;
-		try {
+  @GetMapping("/airport")
+  public List<AirportDTO> getAirport() {
+    List<AirportDTO> list = null;
+    try {
+      if (!recordAirport.isUpdated()) {
+        producer.getAiprotValues();
+        recordAirport.setUpdated(true);
+      }
+      list = recordAirport.getAirport();
+      return list;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return list;
+    }
+  }
 
-			data = producer.getEnvironmentValues(stationCode);
-			return data;
-		}
-		catch (Exception e) {
-			logger.error(CommonConstant.ERROR + e);
-			return data;
-		}
-	}
+  @PostMapping("/flightSchedule")
+  public List<FlightScheduleDTO> getFlightSchedule(@RequestBody ScheduleRequestDTO req) {
+    List<FlightScheduleDTO> list = null;
+    try {
+      list = producer.getFlightScheduleValues(req);
+      return list;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return list;
+    }
+  }
 
+  @PostMapping("/user")
+  public boolean getUser(@RequestBody User user) {
+    boolean isValid = false;
+    try {
+      isValid = producer.getUserValues(user);
+      return isValid;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return isValid;
+    }
+  }
+
+  @PostMapping("analysis")
+  public FinalAnalysisData doAnalysis(@RequestBody FlightScheduleDTO schedule) {
+    FinalAnalysisData data = new FinalAnalysisData();
+    try {
+      data = producer.getAnalysisData(schedule);
+      return data;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return data;
+    }
+  }
+
+  @GetMapping("/environment/{code}")
+  public Environment getEnvironment(@PathVariable("code") String stationCode) {
+    Environment data = null;
+    try {
+
+      data = producer.getEnvironmentValues(stationCode);
+      return data;
+    } catch (Exception e) {
+      logger.error(CommonConstant.ERROR + e);
+      return data;
+    }
+  }
 }

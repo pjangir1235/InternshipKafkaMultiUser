@@ -16,8 +16,7 @@ import com.risk.util.LocalDateString;
 
 @Scope("prototype")
 @Service
-public class CaptainAnalysisServiceImpl {
-
+public class CaptainAnalysisService {
 
   @Autowired Calculation calc;
 
@@ -30,11 +29,12 @@ public class CaptainAnalysisServiceImpl {
   int landing;
   double result;
 
-public CaptainAnalysisServiceImpl() {
-	super();
-}
+  public CaptainAnalysisService() {
+    super();
+  }
+
   public void setCaptainAnalysisServiceImpl(StoreRecord record) {
-    this.record=record;
+    this.record = record;
     data = record.getSchedule();
     scheduleDate = LocalDateString.stringToLocalDate(data.getDateOfDeparture());
     durationLastNinty = 0;
@@ -50,37 +50,39 @@ public CaptainAnalysisServiceImpl() {
     durationTotal += captain.getDuration();
     if (diff <= 15) landing++;
     record.setFlightCaptainSummaryCount(record.getFlightCaptainSummaryCount() - 1);
-
-
-
   }
-  public void finalCalc() {
-	  CaptainDetail finalResult = new CaptainDetail();
-      double hour;
-      hour = calc.getHour(durationLastNinty);
-      result = calc.getPercentage(hour, 100, 5);
-      finalResult.setDurLNinty(result);
-      finalResult.setMessDurLNinty(
-          CommonConstant.OUTOF5+"Last 90 Days done work aprox " + (int) hour + " in particular type");
-      hour = calc.getHour(durationTotal);
-      result = calc.getPercentage(hour, 200, 5);
-      finalResult.setTotHour(result);
-      finalResult.setMessTotHour(
-          CommonConstant.OUTOF5+" Total Hours done in particular type aprox " + (int) hour);
-      result = calc.getPercentage(landing, 7, 3);
-      finalResult.setLanding(result);
-      finalResult.setMessLanding(CommonConstant.OUTOF3+" Total Landing in last 15 days is " + landing);
-      hour = calc.getHour(data.getDuration());
-      if (hour > 8) {
-        result = calc.getPercentageGreater(hour - 8, 4, 3);
-        finalResult.setDurTot(result);
-      } else finalResult.setDurTot(0.0);
-      finalResult.setMessDurTot(
-          CommonConstant.OUTOF3+" Total duration is aprox "
-              + (data.getDuration() / 60)
-              + ":"
-              + (data.getDuration() % 60));
-      record.setCaptainDetail(finalResult);
 
+  public void finalCalc() {
+    CaptainDetail finalResult = new CaptainDetail();
+    double hour;
+    hour = calc.getHour(durationLastNinty);
+    result = calc.getPercentage(hour, 100, 5);
+    finalResult.setDurLNinty(result);
+    finalResult.setMessDurLNinty(
+        CommonConstant.OUTOF5
+            + "Last 90 Days done work aprox "
+            + (int) hour
+            + " in particular type");
+    hour = calc.getHour(durationTotal);
+    result = calc.getPercentage(hour, 200, 5);
+    finalResult.setTotHour(result);
+    finalResult.setMessTotHour(
+        CommonConstant.OUTOF5 + " Total Hours done in particular type aprox " + (int) hour);
+    result = calc.getPercentage(landing, 7, 3);
+    finalResult.setLanding(result);
+    finalResult.setMessLanding(
+        CommonConstant.OUTOF3 + " Total Landing in last 15 days is " + landing);
+    hour = calc.getHour(data.getDuration());
+    if (hour > 8) {
+      result = calc.getPercentageGreater(hour - 8, 4, 3);
+      finalResult.setDurTot(result);
+    } else finalResult.setDurTot(0.0);
+    finalResult.setMessDurTot(
+        CommonConstant.OUTOF3
+            + " Total duration is aprox "
+            + (data.getDuration() / 60)
+            + ":"
+            + (data.getDuration() % 60));
+    record.setCaptainDetail(finalResult);
   }
 }

@@ -22,9 +22,7 @@ public class Queries {
       "SELECT rest FROM RestDetail rest WHERE rest.memberId=?1 AND date=?2";
 
   public static final String AIRCRAFTBYCODE =
-	      "SELECT aircraft from Aircraft aircraft WHERE aircraft.aircraftCode=?1";
-
-
+      "SELECT aircraft from Aircraft aircraft WHERE aircraft.aircraftCode=?1";
 
   private Queries() {}
 }

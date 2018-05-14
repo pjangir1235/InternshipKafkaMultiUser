@@ -13,7 +13,6 @@ import com.risk.services.interfaces.EnvironmentService;
 @Service
 public class EnvironmentServiceImpl implements EnvironmentService {
 
-
   @Autowired private EnvironmentDispatcher envDispatch;
 
   @Override
@@ -21,6 +20,6 @@ public class EnvironmentServiceImpl implements EnvironmentService {
     RestTemplate rest = new RestTemplate();
     Environment env =
         rest.getForObject(Urls.ENVURLSTART + stationCode + Urls.ENVURLEND, Environment.class);
-    envDispatch.dispatch(env,rec);
+    envDispatch.dispatch(env, rec);
   }
 }

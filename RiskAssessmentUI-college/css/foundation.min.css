@@ -1,4 +1,4 @@
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 @media print , screen and (min-width:40em) {
 	.reveal, .reveal.large, .reveal.small, .reveal.tiny {
@@ -110,19 +110,99 @@ audio, video {
 	display: inline-block
 }
 
-audio:not ([controls] ){
-	display: none;
-	height: 0
-}
+audio
 
+
+
+
+:not
+
+
+ 
+
+
+(
+[
+controls
+]
+
+
+ 
+
+
+){
+display
+
+
+
+
+:
+
+
+ 
+
+
+none
+
+
+
+
+;
+height
+
+
+
+
+:
+
+
+ 
+
+
+0
+}
 img {
 	border-style: none
 }
 
-svg:not (:root ){
-	overflow: hidden
-}
+svg
 
+
+
+
+:not
+
+
+ 
+
+
+(
+:root
+
+
+ 
+
+
+){
+overflow
+
+
+
+
+:
+
+
+ 
+
+
+hidden
+
+
+
+
+
+
+}
 button, input, optgroup, select, textarea {
 	font-family: sans-serif;
 	font-size: 100%;
@@ -3912,11 +3992,61 @@ select[multiple] {
 	background-image: none
 }
 
-.is-invalid-input:not (:focus ){
-	border-color: #cc4b37;
-	background-color: #f9ecea
-}
+.is-invalid-input
 
+
+
+
+:not
+
+
+ 
+
+
+(
+:focus
+
+
+ 
+
+
+){
+border-color
+
+
+
+
+:
+
+
+ 
+
+
+#cc4b37
+
+
+
+
+;
+background-color
+
+
+
+
+:
+
+
+ 
+
+
+#f9ecea
+
+
+
+
+
+
+}
 .is-invalid-input:not (:focus )::-webkit-input-placeholder {
 	color: #cc4b37
 }
@@ -4035,13 +4165,13 @@ select[multiple] {
 	margin-left: 0
 }
 
-.accordion-menu .is-accordion-submenu-parent:not (.has-submenu-toggle )>a
-	{
+.accordion-menu .is-accordion-submenu-parent:not (.has-submenu-toggle 
+	 )>a {
 	position: relative
 }
 
-.accordion-menu .is-accordion-submenu-parent:not (.has-submenu-toggle )>a::after
-	{
+.accordion-menu .is-accordion-submenu-parent:not (.has-submenu-toggle 
+	 )>a::after {
 	display: block;
 	width: 0;
 	height: 0;
@@ -5370,10 +5500,50 @@ select[multiple] {
 	padding-right: 1rem
 }
 
-.media-object-section:last-child:not (:nth-child(2) ){
-	padding-left: 1rem
-}
+.media-object-section
 
+
+
+
+:last-child
+
+
+
+
+:not
+
+
+ 
+
+
+(
+:nth-child(2)
+
+
+ 
+
+
+){
+padding-left
+
+
+
+
+:
+
+
+ 
+
+
+1
+rem
+
+
+
+
+
+
+}
 .media-object-section>:last-child {
 	margin-bottom: 0
 }
@@ -7575,7 +7745,19 @@ keyframes shake-7 { 0%,10%,20%,30%,40%,50%,60%,70%,80%,90%{
 
 15%,25%,35%,45%,5%,55%,65%,75%,85%,95%{
 transform
+
+
+
+
+
+
 :translateX
+
+
+
+
+
+
 (-7%)
 }
 }
@@ -7590,7 +7772,19 @@ keyframes spin-cw-1turn { 0%{
 
 100%{
 transform
+
+
+
+
+
+
 :rotate(0)
+
+
+
+
+
+
 }
 }
 .spin-ccw {
@@ -7604,7 +7798,19 @@ keyframes spin-cw-1turn { 0%{
 
 100%{
 transform
+
+
+
+
+
+
 :rotate(1turn)
+
+
+
+
+
+
 }
 }
 .wiggle {
@@ -7618,11 +7824,35 @@ keyframes wiggle-7deg { 40%,50%,60%{
 
 35%,45%,55%,65%{
 transform
+
+
+
+
+
+
 :rotate(-7deg)
+
+
+
+
+
+
 }
 0%,100%,30%,70%{
 transform
+
+
+
+
+
+
 :rotate(0)
+
+
+
+
+
+
 }
 }
 .shake, .spin-ccw, .spin-cw, .wiggle {

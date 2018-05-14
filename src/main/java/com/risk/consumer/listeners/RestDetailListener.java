@@ -20,42 +20,38 @@ import com.risk.util.KakfaConsumerSelection;
 
 @Service
 public class RestDetailListener {
-	@Autowired
-	private KakfaConsumerSelection craterKafka;
-	@Value("${kafka.topic-restDetail}")
-	private String topicName;
-	private static final Logger log = LoggerFactory.getLogger(RestDetailListener.class);
+  @Autowired private KakfaConsumerSelection craterKafka;
 
-	private String groupId = "restDetail";
+  @Value("${kafka.topic-restDetail}")
+  private String topicName;
 
-	public List<RestDetailDTO> start(long startingOffset, int key) {
-		List<RestDetailDTO> restDetail = new ArrayList<>();
-		KafkaConsumer<Integer, JsonNode> kafkaConsumer = craterKafka.setKafka(topicName, groupId.concat(key + ""),
-		                startingOffset);
-		ObjectMapper mapper = new ObjectMapper();
+  private static final Logger log = LoggerFactory.getLogger(RestDetailListener.class);
 
-		try {
-			while (true) {
-				ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
-				for (ConsumerRecord<Integer, JsonNode> record : records) {
-					JsonNode jsonNode = record.value();
-					RestDetailDTO schedule = new RestDetailDTO();
-					schedule = mapper.treeToValue(jsonNode, RestDetailDTO.class);
-					if (record.key() == key)
-						restDetail.add(schedule);
-				}
-				return restDetail;
-			}
+  private String groupId = "restDetail";
 
-		}
-		catch (Exception ex) {
-			log.error(CommonConstant.ERROR + ex);
-			return restDetail;
-		}
-		finally {
-			kafkaConsumer.close();
-		}
-	}
+  public List<RestDetailDTO> start(long startingOffset, int key) {
+    List<RestDetailDTO> restDetail = new ArrayList<>();
+    KafkaConsumer<Integer, JsonNode> kafkaConsumer =
+        craterKafka.setKafka(topicName, groupId.concat(key + ""), startingOffset);
+    ObjectMapper mapper = new ObjectMapper();
 
+    try {
+      while (true) {
+        ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
+        for (ConsumerRecord<Integer, JsonNode> record : records) {
+          JsonNode jsonNode = record.value();
+          RestDetailDTO schedule = new RestDetailDTO();
+          schedule = mapper.treeToValue(jsonNode, RestDetailDTO.class);
+          if (record.key() == key) restDetail.add(schedule);
+        }
+        return restDetail;
+      }
 
+    } catch (Exception ex) {
+      log.error(CommonConstant.ERROR + ex);
+      return restDetail;
+    } finally {
+      kafkaConsumer.close();
+    }
+  }
 }

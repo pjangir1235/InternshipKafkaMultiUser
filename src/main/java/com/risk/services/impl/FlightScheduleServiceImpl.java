@@ -24,30 +24,27 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
   @Autowired FlightPilotSummaryDispatcher pilotSummaryDispatcher;
   @Autowired FlightCaptainSummaryDispatcher captainSummaryDispatcher;
   @Autowired IteratorSize itrSize;
+
   @Override
-  public void getFlightScheduleData(String location, String date,StoreRecord rec) {
+  public void getFlightScheduleData(String location, String date, StoreRecord rec) {
     Iterable<FlightSchedule> itr = craftRepo.findSchedule(location, date);
     Iterator<FlightSchedule> iter = itr.iterator();
 
-    while (iter.hasNext())craftDispatcher.dispatch(iter.next(),rec);
+    while (iter.hasNext()) craftDispatcher.dispatch(iter.next(), rec);
   }
 
   @Override
   public void getFlightSchedulePilotData(
-      int pilotId, String pilotDesignationCode, String dateOfDeparture,StoreRecord rec) {
+      int pilotId, String pilotDesignationCode, String dateOfDeparture, StoreRecord rec) {
     if (pilotDesignationCode.equals("PD1")) {
       Iterable<FlightCaptainSummary> itr = craftRepo.getCaptainData(pilotId, dateOfDeparture);
       Iterator<FlightCaptainSummary> iter = itr.iterator();
-      while(iter.hasNext())
-    	captainSummaryDispatcher.dispatch(iter.next(),rec);
+      while (iter.hasNext()) captainSummaryDispatcher.dispatch(iter.next(), rec);
 
     } else {
       Iterable<FlightPilotSummary> itr = craftRepo.getPilotData(pilotId, dateOfDeparture);
       Iterator<FlightPilotSummary> iter = itr.iterator();
-      while(iter.hasNext())
-    	  pilotSummaryDispatcher.dispatch(iter.next(),rec);
+      while (iter.hasNext()) pilotSummaryDispatcher.dispatch(iter.next(), rec);
     }
-
-
   }
 }

@@ -10,15 +10,14 @@ import com.risk.models.AirportRecord;
 @Configuration
 public class CommonConfig {
 
+  @Bean
+  public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+    return restTemplateBuilder.setConnectTimeout(2000).setReadTimeout(2000).build();
+  }
 
-		return restTemplateBuilder.setConnectTimeout(2000).setReadTimeout(2000).build();
-	}
-
-	@Bean
-	public AirportRecord airportRecord() {
-		return new AirportRecord();
-	}
+  @Bean
+  public AirportRecord airportRecord() {
+    return new AirportRecord();
+  }
 }

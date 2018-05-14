@@ -14,15 +14,13 @@ import com.risk.util.LocalDateString;
 
 @Scope("prototype")
 @Service
-public class AircraftAnalysisServiceImpl {
+public class AircraftAnalysisService {
 
-  public AircraftAnalysisServiceImpl() {
-		super();
-	}
+  public AircraftAnalysisService() {
+    super();
+  }
 
-@Autowired LocalDateString convert;
-
-
+  @Autowired LocalDateString convert;
 
   @Autowired Calculation calc;
 
@@ -31,7 +29,7 @@ public class AircraftAnalysisServiceImpl {
   AircraftCheckListDetail finalResult;
 
   public void setAircraftAnalysisServiceImpl(StoreRecord record) {
-    this.record=record;
+    this.record = record;
     data = record.getSchedule();
     finalResult = new AircraftCheckListDetail();
     setInit();
@@ -50,7 +48,7 @@ public class AircraftAnalysisServiceImpl {
   }
 
   public void getDataAnalysis(AircraftChecklistDTO checklist) {
-	   if (checklist.isDeIce()) {
+    if (checklist.isDeIce()) {
       finalResult.setDeIce(0);
       finalResult.setMsgDeIce(CommonConstant.OUTOF3 + "De Ice done ");
     } else {
@@ -78,6 +76,6 @@ public class AircraftAnalysisServiceImpl {
       finalResult.setAutoPilot(5);
       finalResult.setMsgAutoPilot(CommonConstant.OUTOF5 + "Auto Pilot is not in Flight");
     }
-     record.setAircraftCheckList(finalResult);
-    }
+    record.setAircraftCheckList(finalResult);
+  }
 }

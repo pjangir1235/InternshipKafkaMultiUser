@@ -20,18 +20,22 @@ public class Aircraft {
   private String registrationNo;
 
   public String getManufactureDate() {
-return manufactureDate;}
+    return manufactureDate;
+  }
 
-public void setManufactureDate(String manufactureDate) {
-this.manufactureDate = manufactureDate;}
+  public void setManufactureDate(String manufactureDate) {
+    this.manufactureDate = manufactureDate;
+  }
 
-public String getRegistrationNo() {
-return registrationNo;}
+  public String getRegistrationNo() {
+    return registrationNo;
+  }
 
-public void setRegistrationNo(String registrationNo) {
-this.registrationNo = registrationNo;}
+  public void setRegistrationNo(String registrationNo) {
+    this.registrationNo = registrationNo;
+  }
 
-public Aircraft() {
+  public Aircraft() {
     super();
   }
 

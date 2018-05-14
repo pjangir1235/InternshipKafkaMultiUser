@@ -19,6 +19,7 @@ public interface FlightScheduleRepo extends CrudRepository<FlightSchedule, Long>
 
   @Query(Queries.SCHEDULEBYPILOT)
   List<FlightPilotSummary> getPilotData(int id, String dateOfDeparture);
+
   @Query(Queries.SCHEDULEBYCAPTAIN)
   List<FlightCaptainSummary> getCaptainData(int id, String dateOfDeparture);
 }

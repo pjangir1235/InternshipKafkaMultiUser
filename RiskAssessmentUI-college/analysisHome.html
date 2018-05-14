@@ -23,20 +23,19 @@
 		<ul class="dropdown menu" data-dropdown-menu>
 
 
-			<li style="margin-left: 1px;">
-				<a class="clear button warning" style="font-size: 16px; color: rgb(254, 89, 0);">DataSet</a>
+			<li style="margin-left: 1px;"><a class="clear button warning"
+				style="font-size: 16px; color: rgb(254, 89, 0);">DataSet</a>
 				<ul class="menu vertical">
-					<li class="top-right-menu-li hoverValue">
-						<a class="clear  button warning" ui-sref="analysisHome.pilotData" style="font-size: 16px; color: rgb(254, 89, 0);">Pilot </a>
-					</li>
+					<li class="top-right-menu-li hoverValue"><a
+						class="clear  button warning" ui-sref="analysisHome.pilotData"
+						style="font-size: 16px; color: rgb(254, 89, 0);">Pilot </a></li>
 
-					<li class="top-right-menu-li hoverValue">
-						<a class="clear button warning" ui-sref=analysisHome.aircraftData style="font-size: 16px; color: rgb(254, 89, 0);">Aircraft </a>
-					</li>
-			</li>
+					<li class="top-right-menu-li hoverValue"><a
+						class="clear button warning" ui-sref=analysisHome.aircraftData
+						style="font-size: 16px; color: rgb(254, 89, 0);">Aircraft </a></li></li>
 
-			</ul>
-			</li>
+		</ul>
+		</li>
 
 
 		</ul>
@@ -48,30 +47,26 @@
 
 	<div class="top-div-menu-side-right">
 		<ul class="dropdown menu" data-dropdown-menu>
-			<li>
-				<a class="button warning" ui-sref="analysisHome.result" style="background: rgb(234, 98, 20);">Result </a>
-			</li>
-			<li>
-				<a class="button warning" ui-sref="analysisHome.profeciency" style="background: rgb(234, 98, 20);">Proficiency </a>
-			</li>
-			<li>
-				<a class="button warning" style="background: rgb(234, 98, 20);">Environment</a>
+			<li><a class="button warning" ui-sref="analysisHome.result"
+				style="background: rgb(234, 98, 20);">Result </a></li>
+			<li><a class="button warning" ui-sref="analysisHome.profeciency"
+				style="background: rgb(234, 98, 20);">Proficiency </a></li>
+			<li><a class="button warning"
+				style="background: rgb(234, 98, 20);">Environment</a>
 				<ul class="menu vertical">
-					<li class="top-right-menu-li">
-						<a class="button warning" ui-sref="analysisHome.sourceAirport" style="background: rgb(234, 98, 20);">Source Airport </a>
-					</li>
-					<li class="top-right-menu-li">
-						<a class="button warning" ui-sref="analysisHome.destinationAirport" style="background: rgb(234, 98, 20);">Destination Airport </a>
-					</li>
+					<li class="top-right-menu-li"><a class="button warning"
+						ui-sref="analysisHome.sourceAirport"
+						style="background: rgb(234, 98, 20);">Source Airport </a></li>
+					<li class="top-right-menu-li"><a class="button warning"
+						ui-sref="analysisHome.destinationAirport"
+						style="background: rgb(234, 98, 20);">Destination Airport </a></li>
 
-				</ul>
-			</li>
-			<li>
-				<a class="button warning" ui-sref="analysisHome.aircraft" style="background: rgb(234, 98, 20);">Aircraft</a>
-			</li>
-			<li>
-				<a class="button warning" ui-sref="analysisHome.humanPerformance" style="background: rgb(234, 98, 20);">Human Performance</a>
-			</li>
+				</ul></li>
+			<li><a class="button warning" ui-sref="analysisHome.aircraft"
+				style="background: rgb(234, 98, 20);">Aircraft</a></li>
+			<li><a class="button warning"
+				ui-sref="analysisHome.humanPerformance"
+				style="background: rgb(234, 98, 20);">Human Performance</a></li>
 
 
 		</ul>
@@ -83,7 +78,8 @@
 <div class="top-div-analysis">
 	<div class="top-div-analysis-partition">
 		<div class="top-div-analysis-left">
-			<h5>Aircraft Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<h5>Aircraft
+				Code&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</h5>
 			<h6 ng-model="aircraftCode">{{aircraftCode}}</h6>
 
@@ -100,13 +96,14 @@
 	</div>
 	<div class="top-div-analysis-partition">
 		<div class="top-div-analysis-left">
-			<h5>Source Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<h5>Source
+				Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</h5>
 			<h6 ng-model="sourceLocation">{{sourceLocation}}</h6>
 		</div>
 		<div class="top-div-analysis-left">
-			<h5>Dest. Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</h5>
+			<h5>Dest.
+				Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
 			<h6 ng-model="destinationLocation">{{destinationLocation}}</h6>
 		</div>
 		<div class="top-div-analysis-left">

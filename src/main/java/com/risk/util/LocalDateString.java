@@ -9,23 +9,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LocalDateString {
-	private LocalDateString() {
-	}
+  private LocalDateString() {}
 
-	public static String localDateToString(LocalDate date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		return (date).format(formatter);
-	}
+  public static String localDateToString(LocalDate date) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    return (date).format(formatter);
+  }
 
-	public static LocalDate stringToLocalDate(String date) {
-		return LocalDate.parse(date);
-	}
+  public static LocalDate stringToLocalDate(String date) {
+    return LocalDate.parse(date);
+  }
 
-	public static long differnceInDate(LocalDate dateFrom, LocalDate dateTo) {
-		return ChronoUnit.DAYS.between(dateFrom, dateTo);
-	}
+  public static long differnceInDate(LocalDate dateFrom, LocalDate dateTo) {
+    return ChronoUnit.DAYS.between(dateFrom, dateTo);
+  }
 
-	public static LocalTime stringtoLocalTime(String time) {
-		return LocalTime.parse(time, DateTimeFormatter.ISO_LOCAL_TIME);
-	}
+  public static LocalTime stringtoLocalTime(String time) {
+    return LocalTime.parse(time, DateTimeFormatter.ISO_LOCAL_TIME);
+  }
 }

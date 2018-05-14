@@ -61,10 +61,18 @@ public class AirportRecord {
     this.airport.add(airport);
   }
 
-@Override
-public String toString() {
-	return "AirportRecord [isUpdated=" + isUpdated + ", startOffset=" + startOffset + ", endOffSet=" + endOffSet
-	                + ", airport=" + airport + ", airportCount=" + airportCount + "]";
-}
-
+  @Override
+  public String toString() {
+    return "AirportRecord [isUpdated="
+        + isUpdated
+        + ", startOffset="
+        + startOffset
+        + ", endOffSet="
+        + endOffSet
+        + ", airport="
+        + airport
+        + ", airportCount="
+        + airportCount
+        + "]";
+  }
 }

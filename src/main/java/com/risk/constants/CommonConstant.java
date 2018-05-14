@@ -13,8 +13,9 @@ public class CommonConstant {
   public static final String ERROR = "Error->";
   public static final String NOWEATHER = "No Weather Report to this Location";
   public static final String RECORDNOTFOUND = "No record Available";
-public static final String OUTOF3= "Out of 3\n";
-public static final String OUTOF4 = "Out of 4\n";
-public static final String OUTOF5 = "Out of 5\n";
+  public static final String OUTOF3 = "Out of 3\n";
+  public static final String OUTOF4 = "Out of 4\n";
+  public static final String OUTOF5 = "Out of 5\n";
+
   private CommonConstant() {}
 }

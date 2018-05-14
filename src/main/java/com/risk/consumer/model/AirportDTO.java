@@ -47,8 +47,18 @@ public class AirportDTO {
 
   public void setMountain(boolean isMountain) {
     this.isMountain = isMountain;
-
   }
 
-@Override public String toString(){return "AirportDTO [airportId=" + airportId + ", airportName=" + airportName + ", airportCode=" + airportCode + ", isMountain=" + isMountain + "]";}
+  @Override
+  public String toString() {
+    return "AirportDTO [airportId="
+        + airportId
+        + ", airportName="
+        + airportName
+        + ", airportCode="
+        + airportCode
+        + ", isMountain="
+        + isMountain
+        + "]";
+  }
 }

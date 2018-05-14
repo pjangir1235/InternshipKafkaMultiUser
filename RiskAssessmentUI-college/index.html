@@ -2,25 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Login</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="shortcut icon" href="./images/fedexLOGO.ico" />
-	<link rel="stylesheet" href="css/foundation.min.css">
-	<link rel="stylesheet" href="css/angular-growl.css">
-	<link rel="stylesheet" href="css/login.css">
-	<link rel="stylesheet" href="css/loader.css">
-	<link rel='stylesheet' href='css/loading-bar.min.css' type='text/css' media='all' />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Login</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="shortcut icon" href="./images/fedexLOGO.ico" />
+<link rel="stylesheet" href="css/foundation.min.css">
+<link rel="stylesheet" href="css/angular-growl.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/loader.css">
+<link rel='stylesheet' href='css/loading-bar.min.css' type='text/css'
+	media='all' />
 
-	<script type="text/javascript">
+<script type="text/javascript">
 		javascript: window.history.forward(1);
 	</script>
 
 </head>
 
-<body class="body-background" ng-app="module1" ng-controller="loginController">
+<body class="body-background" ng-app="module1"
+	ng-controller="loginController">
 	<div class="loader-wrapper" ng-show='loginLoading'>
 		<div class="loader">
 			<div class="roller"></div>
@@ -50,13 +52,15 @@
 					<h3 class="text-center">Fedex&nbsp; FRA</h3>
 				</div>
 				<h4 class="text-center">Login</h4>
-				<label for="sign-in-form-username">User Name</label>
-				<input type="text" class="sign-in-form-username" id="sign-in-form-username" ng-model="user" placeholder="User Name">
-				<label for="sign-in-form-password">Password</label>
-				<input type="password" class="sign-in-form-password" id="sign-in-form-password" ng-model="password" placeholder="Password"
-				 autocomplete="off">
-				<button class="sign-in-form-button" ng-click="login()">Sign In
-				</button>
+				<label for="sign-in-form-username">User Name</label> <input
+					type="text" class="sign-in-form-username"
+					id="sign-in-form-username" ng-model="user" placeholder="User Name">
+				<label for="sign-in-form-password">Password</label> <input
+					type="password" class="sign-in-form-password"
+					id="sign-in-form-password" ng-model="password"
+					placeholder="Password" autocomplete="off">
+				<button class="sign-in-form-button" ng-click="login()">Sign
+					In</button>
 			</div>
 		</div>
 	</form>

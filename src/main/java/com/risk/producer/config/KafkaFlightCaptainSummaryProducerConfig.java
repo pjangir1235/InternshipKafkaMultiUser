@@ -20,7 +20,8 @@ public class KafkaFlightCaptainSummaryProducerConfig {
   @Bean
   public KafkaTemplate<Integer, FlightCaptainSummary> flightCaptainSummaryKafkaTemplate() {
 
-    KafkaTemplate<Integer, FlightCaptainSummary> kafkaTemplate = new KafkaTemplate<>(producerFactory());
+    KafkaTemplate<Integer, FlightCaptainSummary> kafkaTemplate =
+        new KafkaTemplate<>(producerFactory());
     kafkaTemplate.setDefaultTopic(topic);
     return kafkaTemplate;
   }

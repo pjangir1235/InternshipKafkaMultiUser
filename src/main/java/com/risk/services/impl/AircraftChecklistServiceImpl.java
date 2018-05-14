@@ -15,11 +15,10 @@ public class AircraftChecklistServiceImpl implements AircraftChecklistService {
   @Autowired AircraftChecklistRepo craftRepo;
   @Autowired AircraftChecklistDispatcher craftDispatcher;
 
-
-
   @Override
-  public void getAircraftChecklistOnAircraftCodeData(String aircraftCode, String dateOfDeparture,StoreRecord rec) {
+  public void getAircraftChecklistOnAircraftCodeData(
+      String aircraftCode, String dateOfDeparture, StoreRecord rec) {
     AircraftChecklist checkList = craftRepo.findAircraft(aircraftCode, dateOfDeparture);
-    craftDispatcher.dispatch(checkList,rec);
+    craftDispatcher.dispatch(checkList, rec);
   }
 }

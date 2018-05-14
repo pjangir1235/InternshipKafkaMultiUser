@@ -17,21 +17,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.risk.constants.CommonConstant;
 import com.risk.consumer.model.FlightScheduleDTO;
 import com.risk.util.KakfaConsumerSelection;
+
 @Service
 public class FlightScheduleListener {
 
-	@Autowired
-	private KakfaConsumerSelection craterKafka;
-    @Value("${kafka.topic-flightSchedule}")
-    private String topicName;
+  @Autowired private KakfaConsumerSelection craterKafka;
 
-    private String groupId="flightSchedule";
-    private static final Logger log = LoggerFactory.getLogger(FlightScheduleListener.class);
+  @Value("${kafka.topic-flightSchedule}")
+  private String topicName;
 
-  public List<FlightScheduleDTO> start(long startingOffset,  int key) {
-	     List<FlightScheduleDTO> flightSchedule = new ArrayList<>();
+  private String groupId = "flightSchedule";
+  private static final Logger log = LoggerFactory.getLogger(FlightScheduleListener.class);
+
+  public List<FlightScheduleDTO> start(long startingOffset, int key) {
+    List<FlightScheduleDTO> flightSchedule = new ArrayList<>();
     KafkaConsumer<Integer, JsonNode> kafkaConsumer =
-    				craterKafka.setKafka(topicName, groupId.concat(key+""), startingOffset);
+        craterKafka.setKafka(topicName, groupId.concat(key + ""), startingOffset);
     ObjectMapper mapper = new ObjectMapper();
 
     try {
@@ -47,11 +48,10 @@ public class FlightScheduleListener {
       }
 
     } catch (Exception ex) {
-    	log.error(CommonConstant.ERROR+ex);
+      log.error(CommonConstant.ERROR + ex);
       return flightSchedule;
     } finally {
       kafkaConsumer.close();
     }
   }
-
 }

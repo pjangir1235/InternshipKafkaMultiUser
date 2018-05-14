@@ -17,15 +17,11 @@ public class AircraftServiceImpl implements AircraftService {
   @Autowired AircraftRepo craftRepo;
   @Autowired AircraftDispatcher craftDispatcher;
 
-
   @Override
   public void getAircraftData(String aircraftCode, StoreRecord rec) {
 
     Iterable<Aircraft> itr = craftRepo.findData(aircraftCode);
     Iterator<Aircraft> iter = itr.iterator();
-    while (iter.hasNext())
-		craftDispatcher.dispatch(iter.next(),rec);
+    while (iter.hasNext()) craftDispatcher.dispatch(iter.next(), rec);
   }
-
-
 }

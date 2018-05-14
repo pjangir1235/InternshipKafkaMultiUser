@@ -69,6 +69,22 @@ public class Result {
     super();
   }
 
-@Override public String toString(){return "Result [proficiency=" + proficiency + ", sourceEnvironment=" + sourceEnvironment + ", destinationEnvironment=" + destinationEnvironment + ", aircraft=" + aircraft + ", human=" + human + ", finalPercent=" + finalPercent + ", Conclusion=" + finalConclusion + "]";}
-
+  @Override
+  public String toString() {
+    return "Result [proficiency="
+        + proficiency
+        + ", sourceEnvironment="
+        + sourceEnvironment
+        + ", destinationEnvironment="
+        + destinationEnvironment
+        + ", aircraft="
+        + aircraft
+        + ", human="
+        + human
+        + ", finalPercent="
+        + finalPercent
+        + ", Conclusion="
+        + finalConclusion
+        + "]";
+  }
 }

@@ -78,6 +78,24 @@ public class CaptainDetail {
     this.messLanding = messLanding;
   }
 
-@Override public String toString(){return "CaptainDetail [durTot=" + durTot + ", messDurTot=" + messDurTot + ", durLNinty=" + durLNinty + ", messDurLNinty=" + messDurLNinty + ", totHour=" + totHour + ", messTotHour=" + messTotHour + ", landing=" + landing + ", messLanding=" + messLanding + "]";}
-
+  @Override
+  public String toString() {
+    return "CaptainDetail [durTot="
+        + durTot
+        + ", messDurTot="
+        + messDurTot
+        + ", durLNinty="
+        + durLNinty
+        + ", messDurLNinty="
+        + messDurLNinty
+        + ", totHour="
+        + totHour
+        + ", messTotHour="
+        + messTotHour
+        + ", landing="
+        + landing
+        + ", messLanding="
+        + messLanding
+        + "]";
+  }
 }

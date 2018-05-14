@@ -13,18 +13,17 @@ import com.risk.result.model.FinalAnalysisData;
 
 public interface MainService {
 
-	void getAiprotValues();
+  void getAiprotValues();
 
-	List<AircraftDTO> getAircraftValues(String aircraftCode);
+  List<AircraftDTO> getAircraftValues(String aircraftCode);
 
-	FinalAnalysisData getAnalysisData(FlightScheduleDTO flightData) throws ParseException;
+  FinalAnalysisData getAnalysisData(FlightScheduleDTO flightData) throws ParseException;
 
-	Environment getEnvironmentValues(String stationCode);
+  Environment getEnvironmentValues(String stationCode);
 
-	List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req);
+  List<FlightScheduleDTO> getFlightScheduleValues(ScheduleRequestDTO req);
 
-	boolean getUserValues(User user);
+  boolean getUserValues(User user);
 
-	void setKey(StoreRecord rec);
-
+  void setKey(StoreRecord rec);
 }

@@ -16,7 +16,8 @@ public class AircraftDispatcher {
   private static final Logger log = LoggerFactory.getLogger(AircraftDispatcher.class);
 
   @Autowired private KafkaTemplate<Integer, Aircraft> kafkaTemplate;
-  public boolean dispatch(Aircraft craft ,StoreRecord rec) {
+
+  public boolean dispatch(Aircraft craft, StoreRecord rec) {
     try {
       SendResult<Integer, Aircraft> sendResult =
           kafkaTemplate.sendDefault(rec.getKey(), craft).get();
@@ -31,7 +32,7 @@ public class AircraftDispatcher {
               + recordMetadata.timestamp()
               + " }";
       log.info(metaRecord);
-      rec.setAircraftOffset((int)recordMetadata.offset());
+      rec.setAircraftOffset((int) recordMetadata.offset());
       return true;
     } catch (Exception e) {
       log.error(" " + e);

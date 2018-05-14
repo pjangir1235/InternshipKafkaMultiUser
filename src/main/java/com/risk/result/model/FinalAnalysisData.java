@@ -1,7 +1,5 @@
 package com.risk.result.model;
 
-
-
 public class FinalAnalysisData {
   private AircraftCheckListDetail aircraftCheckList;
   private CaptainDetail captainDetail;
@@ -13,13 +11,13 @@ public class FinalAnalysisData {
 
   public FinalAnalysisData() {
     super();
-   aircraftCheckList=new AircraftCheckListDetail();
-   captainDetail=new CaptainDetail();
-    crewTotal=new HumanPerformance();
-    envDestination=new DestinationEnvironment();
-    pilotDetail=new PilotDetail();
-    envSource=new SourceEnvironment();
-    result=new Result();
+    aircraftCheckList = new AircraftCheckListDetail();
+    captainDetail = new CaptainDetail();
+    crewTotal = new HumanPerformance();
+    envDestination = new DestinationEnvironment();
+    pilotDetail = new PilotDetail();
+    envSource = new SourceEnvironment();
+    result = new Result();
   }
 
   public AircraftCheckListDetail getAircraftCheckList() {

@@ -31,7 +31,8 @@
 .top-bar-left {
 	height: 53px;
 	/* border: 1px solid red; */
-	width: 40px;
+	width: 12em;
+	max-width: 25%;
 }
 
 .top-bar-left-logo {
@@ -531,8 +532,8 @@ h4 {
 
 .bottom-div-analysis-partition-second {
 	/* border: 1px solid violet; */
-	margin-top: 17%;
-	margin-left: 400px;;
+	margin-top: 300px;
+	margin-left: 400px;
 	width: 60%;
 	max-width: 800px;
 	background-color: rgba(104, 102, 102, 0.9);
@@ -574,13 +575,12 @@ h4 {
 	transform: translate(-50%, -50%)
 }
 
-
 /* //////////aircraftData */
-.tableAircraft{
+.tableAircraft {
 	border-radius: 5 px;
-
 }
-.tableAircraft tr{
+
+.tableAircraft tr {
 	background-color: rgb(234, 98, 20);
 	border-radius: 5 px;
 }

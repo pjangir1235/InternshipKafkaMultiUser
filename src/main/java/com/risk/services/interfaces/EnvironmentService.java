@@ -4,5 +4,5 @@ import com.risk.models.StoreRecord;
 
 public interface EnvironmentService {
 
-  void getEnvironmentData(String stationCode,StoreRecord rec);
+  void getEnvironmentData(String stationCode, StoreRecord rec);
 }

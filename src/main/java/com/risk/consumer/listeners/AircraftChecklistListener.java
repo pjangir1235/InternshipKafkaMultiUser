@@ -18,39 +18,37 @@ import com.risk.util.KakfaConsumerSelection;
 @Component
 public class AircraftChecklistListener {
 
-	@Autowired
-	private KakfaConsumerSelection craterKafka;
-	@Value("${kafka.topic-aircraftChecklist}")
-	String topicName;
-	String groupId = "aircraftChecklist";
-	 private static final Logger log = LoggerFactory.getLogger(AircraftChecklistListener.class);
-	public AircraftChecklistDTO start(long startingOffset, int key) {
-		AircraftChecklistDTO craft = new AircraftChecklistDTO();
-		KafkaConsumer<Integer, JsonNode> kafkaConsumer = craterKafka.setKafka(topicName, groupId.concat(key + ""),
-		                startingOffset);
-		ObjectMapper mapper = new ObjectMapper();
+  @Autowired private KakfaConsumerSelection craterKafka;
 
-		try {
+  @Value("${kafka.topic-aircraftChecklist}")
+  String topicName;
 
-			ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
+  String groupId = "aircraftChecklist";
+  private static final Logger log = LoggerFactory.getLogger(AircraftChecklistListener.class);
 
-			for (ConsumerRecord<Integer, JsonNode> record : records) {
-				JsonNode jsonNode = record.value();
+  public AircraftChecklistDTO start(long startingOffset, int key) {
+    AircraftChecklistDTO craft = new AircraftChecklistDTO();
+    KafkaConsumer<Integer, JsonNode> kafkaConsumer =
+        craterKafka.setKafka(topicName, groupId.concat(key + ""), startingOffset);
+    ObjectMapper mapper = new ObjectMapper();
 
-				craft = mapper.treeToValue(jsonNode, AircraftChecklistDTO.class);
-				if (record.key() == key)
-					return craft;
-			}
-			return null;
+    try {
 
-		}
-		catch (Exception ex) {
-			log.error(CommonConstant.ERROR+ex);
-			return craft;
-		}
-		finally {
-			kafkaConsumer.close();
-		}
-	}
+      ConsumerRecords<Integer, JsonNode> records = kafkaConsumer.poll(1000);
 
+      for (ConsumerRecord<Integer, JsonNode> record : records) {
+        JsonNode jsonNode = record.value();
+
+        craft = mapper.treeToValue(jsonNode, AircraftChecklistDTO.class);
+        if (record.key() == key) return craft;
+      }
+      return null;
+
+    } catch (Exception ex) {
+      log.error(CommonConstant.ERROR + ex);
+      return craft;
+    } finally {
+      kafkaConsumer.close();
+    }
+  }
 }
