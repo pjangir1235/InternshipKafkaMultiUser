@@ -232,8 +232,8 @@ public class AnalysisServiceImpl {
     total += value;
     outOf += 5;
 
-    percentageAircraft = calc.getFinalPercentage(total, outOf, 20);
-    percentageInHundered = calc.getFinalPercentage(percentageDestination, 20, 100);
+    percentageAircraft = calc.getFinalPercentage(total, outOf, 30);
+    percentageInHundered = calc.getFinalPercentage(percentageDestination, 30, 100);
     result.setAircraft(percentageInHundered);
   }
 
@@ -246,8 +246,8 @@ public class AnalysisServiceImpl {
     value = crewTotal.getRestTime();
     total += value;
     outOf += 5;
-    percentageHuman = calc.getFinalPercentage(total, outOf, 25);
-    percentageInHundered = calc.getFinalPercentage(percentageHuman, 25, 100);
+    percentageHuman = calc.getFinalPercentage(total, outOf, 15);
+    percentageInHundered = calc.getFinalPercentage(percentageHuman, 15, 100);
     result.setHuman(percentageInHundered);
   }
 
